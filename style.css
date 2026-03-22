@@ -1,0 +1,238 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter/Inter-Light.otf') format('otf');
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter/Inter-Regular.otf') format('otf');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('/fonts/Inter/Inter-Bold.otf') format('otf');
+    font-weight: 600;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+button:hover {
+    transform: translateY(-2px);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #fff;
+    background-color: #181818;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 30px;
+    padding-inline: 100px;
+    background-color: #181818;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+.nav-links li {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+.nav-links li:hover {
+    transform: translateY(-2px);
+}
+.nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 200;
+}
+.nav-links li a.current-page { 
+    font-weight: 600; 
+    text-decoration: underline;
+    text-underline-offset: 10px;
+}
+
+.user-actions {
+    display: flex;
+    gap: 30px;
+}
+.user-actions button {
+    gap: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 200;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #D9D9D9;
+    border-radius: 5px;
+}
+.search-bar input {
+    background-color: transparent;
+    border: none;
+    color: #181818;
+    font-size: 16px;
+    font-weight: 400;
+    width: 300px;
+    margin: 10px;
+}
+.search-bar input:focus {
+    outline: none;
+}
+.search-bar button {
+    margin-right: 5px;
+}
+.search-bar button:hover {
+    transform: scale(0.95);
+}
+
+.background {
+    min-height: 800px;
+    background-image: url("images/background.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+h1 {
+    font-size: 64px;
+    text-align: center;
+    width: 100%;
+    padding: 1rem;
+}
+
+.slider {
+    position: relative;
+}
+.slider-content {
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    white-space: nowrap;
+}
+.slider-content div {
+    border-radius: 36px;
+    width: 785px;
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+.slider-buttons {
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: 100px;
+    align-items: center;
+}
+.slider-buttons button {
+    background-color: #181818;
+    width: 85px;
+    height: 85px;
+    border-radius: 100%;
+    justify-content: center;
+}
+.slider-buttons button:active {
+    transform: scale(0.9);
+}
+
+.prev-slide {
+    background-image: url("images/slider/Slide\ 1.png");
+}
+.cur-slide {
+    background-image: url("images/slider/Slide\ 2.png");
+}
+.next-slide {
+    background-image: url("images/slider/Slide\ 3.png");
+}
+
+.slider-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+    padding-bottom: 8px;
+}
+
+.slider-status .slider-dot {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    padding: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.35);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.slider-status .slider-dot.is-active {
+    background-color: #fff;
+    transform: scale(1.2);
+}
+
+.slider-status .slider-dot:hover {
+    transform: translateY(0);
+    background-color: rgba(255, 255, 255, 0.65);
+}
+
+.slider-status .slider-dot.is-active:hover {
+    transform: scale(1.2);
+}
+
+main {
+    padding-inline: 100px;
+}
+footer {
+    padding-inline: 100px;
+    height: 500px;
+} 
+.footer-line {
+    height: 1px;
+    width: 100%;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.05);;
+}

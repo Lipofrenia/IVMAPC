@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVMAPC | Магазин Компьютерной техники</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <img src="images/logo.svg" alt="IVMAPC">
+        <ul class="nav-links">
+            <li><a class="current-page" href="#">Главная</a></li>
+            <li><a href="#">О компании</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Каталог</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" placeholder="Поиск">
+            <button type="submit"><img src="images/research.svg" alt="Find"></button>
+        </div>
+        <div class="user-actions">
+            <button type="button">
+                <img src="images/cart.svg" alt="Корзина">
+                Корзина
+            </button>
+            <button type="button">
+                <img src="images/account.svg" alt="Профиль">
+                Профиль
+            </button>
+        </div>
+    </nav>
+    <div class="background">
+        <header>
+            <h1>Собери свой Первый ПК</h1>
+            <section class="slider" aria-roledescription="carousel" aria-label="Слайды">
+                <div class="slider-content">
+                    <div class="prev-slide"></div>
+                    <div class="cur-slide"></div>
+                    <div class="next-slide"></div>
+                </div>
+                <div class="slider-buttons">
+                    <button type="button" class="prev" aria-label="Предыдущий слайд"><img src="images/left.svg" alt=""></button>
+                    <button type="button" class="next" aria-label="Следующий слайд"><img src="images/right.svg" alt=""></button>
+                </div>
+                <div class="slider-status" role="tablist" aria-label="Номер слайда">
+                    <button type="button" class="slider-dot is-active" data-slide="0" role="tab" aria-selected="true" aria-label="Слайд 1"></button>
+                    <button type="button" class="slider-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Слайд 2"></button>
+                    <button type="button" class="slider-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Слайд 3"></button>
+                    <button type="button" class="slider-dot" data-slide="3" role="tab" aria-selected="false" aria-label="Слайд 4"></button>
+                    <button type="button" class="slider-dot" data-slide="4" role="tab" aria-selected="false" aria-label="Слайд 5"></button>
+                </div>
+            </section>
+        </header>
+        <main>
+    
+        </main>
+    </div>
+    <footer>
+        <div class="footer-line"></div>
+                
+    </footer>
+    <script src="main.js" defer></script>
+</body>
+</html>
