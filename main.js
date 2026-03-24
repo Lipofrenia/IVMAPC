@@ -1,84 +1,144 @@
-(function () {
-    const SLIDES = [
-        "images/slider/Slide 1.png",
-        "images/slider/Slide 2.png",
-        "images/slider/Slide 3.png",
-        "images/slider/Slide 4.png",
-        "images/slider/Slide 5.png",
-    ];
-
-    const slider = document.querySelector(".slider");
-    if (!slider) return;
-
-    const prevSlideEl = slider.querySelector(".prev-slide");
-    const curSlideEl = slider.querySelector(".cur-slide");
-    const nextSlideEl = slider.querySelector(".next-slide");
-    const btnPrev = slider.querySelector(".slider-buttons .prev");
-    const btnNext = slider.querySelector(".slider-buttons .next");
-    const dotsContainer = slider.querySelector(".slider-status");
-
-    if (!prevSlideEl || !curSlideEl || !nextSlideEl || !btnPrev || !btnNext || !dotsContainer) {
-        return;
+(function() {
+    'use strict';
+    
+    const track = document.querySelector('.slider-track');
+    const slides = document.querySelectorAll('.slide');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+    const dots = document.querySelectorAll('.slider-dot');
+    const container = document.querySelector('.slider-container');
+    
+    let currentIndex = 0;
+    let autoScrollInterval;
+    const intervalTime = 10000;
+    let slideWidth = 0;
+    let gap = 50;
+    let containerWidth = 0;
+    let offsetCenter = 0;
+    
+    // Функция для получения ширины слайда и обновления отступов
+    function updateDimensions() {
+        if (slides.length === 0) return;
+        
+        slideWidth = slides[0].offsetWidth;
+    
+        const trackStyle = window.getComputedStyle(track);
+        gap = parseFloat(trackStyle.gap) || 50;
+        
+        containerWidth = container ? container.offsetWidth : window.innerWidth;
+        
+        offsetCenter = (containerWidth - slideWidth) / 2;
+        
+        track.style.paddingLeft = offsetCenter + 'px';
+        track.style.paddingRight = offsetCenter + 'px';
     }
-
-    let current = 0;
-
-    function slideUrl(index) {
-        const path = SLIDES[index];
-        const encoded = path
-            .split("/")
-            .map((part) => encodeURIComponent(part))
-            .join("/");
-        return `url("${encoded}")`;
+    
+    // Функция для получения полной ширины слайда с gap
+    function getTotalSlideWidth() {
+        return slideWidth + gap;
     }
-
-    function mod(n, m) {
-        return ((n % m) + m) % m;
-    }
-
-    function render() {
-        const n = SLIDES.length;
-        const prevIdx = mod(current - 1, n);
-        const nextIdx = mod(current + 1, n);
-
-        prevSlideEl.style.backgroundImage = slideUrl(prevIdx);
-        curSlideEl.style.backgroundImage = slideUrl(current);
-        nextSlideEl.style.backgroundImage = slideUrl(nextIdx);
-
-        const dots = dotsContainer.querySelectorAll(".slider-dot");
-        dots.forEach((dot, i) => {
-            const active = i === current;
-            dot.classList.toggle("is-active", active);
-            dot.setAttribute("aria-selected", active ? "true" : "false");
+    
+    // Обновление позиции слайдера
+    function updateSlider() {
+        if (slideWidth === 0) {
+            updateDimensions();
+        }
+        
+        const totalWidth = getTotalSlideWidth();
+        if (totalWidth === 0) return;
+        
+        // Вычисляем смещение
+        const offset = -currentIndex * totalWidth;
+        track.style.transform = `translateX(${offset}px)`;
+        
+        // Обновляем точки
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add('is-active');
+                dot.setAttribute('aria-selected', 'true');
+            } else {
+                dot.classList.remove('is-active');
+                dot.setAttribute('aria-selected', 'false');
+            }
         });
     }
-
-    function goTo(index) {
-        const n = SLIDES.length;
-        current = mod(index, n);
-        render();
+    
+    // Следующий слайд
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlider();
+        resetAutoScroll();
     }
-
-    btnPrev.addEventListener("click", () => goTo(current - 1));
-    btnNext.addEventListener("click", () => goTo(current + 1));
-
-    dotsContainer.addEventListener("click", (e) => {
-        const dot = e.target.closest(".slider-dot");
-        if (!dot || !dotsContainer.contains(dot)) return;
-        const idx = parseInt(dot.dataset.slide, 10);
-        if (!Number.isNaN(idx)) goTo(idx);
-    });
-
-    slider.tabIndex = 0;
-    slider.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") {
-            e.preventDefault();
-            goTo(current - 1);
-        } else if (e.key === "ArrowRight") {
-            e.preventDefault();
-            goTo(current + 1);
+    
+    // Предыдущий слайд
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateSlider();
+        resetAutoScroll();
+    }
+    
+    // Переход к слайду
+    function goToSlide(index) {
+        if (index >= 0 && index < slides.length) {
+            currentIndex = index;
+            updateSlider();
+            resetAutoScroll();
         }
+    }
+    
+    // Сброс автопрокрутки
+    function resetAutoScroll() {
+        if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+        }
+        autoScrollInterval = setInterval(nextSlide, intervalTime);
+    }
+    
+    // Обработка изменения размера окна
+    let resizeTimeout;
+    function handleResize() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateDimensions();
+            updateSlider();
+        }, 100);
+    }
+    
+    // Добавляем обработчики
+    if (nextButton) nextButton.addEventListener('click', nextSlide);
+    if (prevButton) prevButton.addEventListener('click', prevSlide);
+    
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
     });
-
-    render();
+    
+    // Инициализация
+    function init() {
+        // Ждем загрузки изображений
+        setTimeout(() => {
+            updateDimensions();
+            updateSlider();
+            console.log('Слайдер инициализирован');
+        }, 100);
+        
+        resetAutoScroll();
+        
+        // Пауза при наведении
+        const slider = document.querySelector('.slider');
+        if (slider) {
+            slider.addEventListener('mouseenter', () => {
+                if (autoScrollInterval) clearInterval(autoScrollInterval);
+            });
+            slider.addEventListener('mouseleave', resetAutoScroll);
+        }
+        
+        window.addEventListener('resize', handleResize);
+    }
+    
+    // Запуск
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
 })();
