@@ -18,8 +18,8 @@
     font-style: normal;
 }
 @font-face {
-    font-family: 'DotGothic';
-    src: url('fonts/DotGothic16-Regular.ttf') format('truetype');
+    font-family: 'Y224';
+    src: url('fonts/Y224.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
 }
@@ -43,6 +43,8 @@ button:hover {
 }
 
 body {
+    /* display: flex;
+    flex-direction: column; */
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.5;
@@ -53,8 +55,6 @@ body {
 nav {
     position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 100;
     display: flex;
     align-items: center;
@@ -140,110 +140,245 @@ header {
 }
 
 h1 {
-    font-family: 'DotGothic';
+    padding: 20px;
+    font-family: 'Y224';
     font-weight: 400;
-    font-size: 64px;
+    font-size: 50px;
     text-align: center;
     width: 100%;
-    letter-spacing: -10px;
+}
+h2 {
+    padding: 20px 0 20px;
+    font-weight: 600;
+    font-size: 40px;
 }
 
 .slider {
-    margin: 15px;
     position: relative;
-    overflow: hidden;
-}
-.slider-container {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-}
-.slider-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    will-change: transform;
-    gap: 30px;
-}
-.slide {
-    border-radius: 30px;
-    width: 1100px;
-    height: 470px;
-    background-size: cover;
-    background-position: center;
-    flex-shrink: 0;
-    &.first {
-        background-image: url("images/slider/Slide\ 1.png");
-    }
-    &.second {
-        background-image: url("images/slider/Slide\ 2.png");
-    }
-    &.third {
-        background-image: url("images/slider/Slide\ 3.png");
-    }
-    &.fourth {
-        background-image: url("images/slider/Slide\ 4.png");
-    }
-    &.fifth {
-        background-image: url("images/slider/Slide\ 5.png");
-    }
-}
-.slider-buttons {
-    position: absolute;
-    top: 35%;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 70%;  
-    align-items: center;
-}
-.slider-buttons button {
-    background-color: #181818;
-    width: 85px;
-    height: 85px;
-    border-radius: 100%;
-    justify-content: center;
-}
-.slider-buttons button:active {
-    transform: scale(0.9);
 }
 
-.slider-status {
+.hero-swiper {
+    width: 100%;
+}
+
+.hero-swiper .swiper-wrapper {
+    align-items: center;
+}
+
+.hero-swiper .swiper-slide {
+    width: min(1100px, calc(100vw - 40px));
+    height: auto;
+    display: flex;
+    justify-content: center;
+    transition: transform 0.45s ease;
+}
+
+.hero-swiper .swiper-slide:not(.swiper-slide-active) {
+    transform: scale(0.94);
+}
+
+.hero-swiper .swiper-slide-active {
+    transform: scale(1);
+    z-index: 1;
+}
+
+.slide-card {
+    width: 100%;
+    height: clamp(280px, 42vw, 470px);
+    max-height: 470px;
+    border-radius: 30px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.42);
+    transition: filter 0.45s ease, box-shadow 0.45s ease, transform 0.45s ease;
+}
+
+.hero-swiper .swiper-slide:not(.swiper-slide-active) .slide-card {
+    filter: brightness(0.52) saturate(0.92);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.hero-swiper .swiper-slide-active .slide-card {
+    filter: brightness(1);
+    box-shadow: 0 32px 70px rgba(0, 0, 0, 0.55);
+}
+
+.slide-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.35) 100%);
+    opacity: 0.85;
+    transition: opacity 0.45s ease;
+}
+
+.hero-swiper .swiper-slide-active .slide-card::after {
+    opacity: 0.65;
+}
+
+.slide-card--1 {
+    background-image: url("images/slider/Slide\ 1.png");
+}
+
+.slide-card--2 {
+    background-image: url("images/slider/Slide\ 2.png");
+}
+
+.slide-card--3 {
+    background-image: url("images/slider/Slide\ 3.png");
+}
+
+.slide-card--4 {
+    background-image: url("images/slider/Slide\ 4.png");
+}
+
+.slide-card--5 {
+    background-image: url("images/slider/Slide\ 5.png");
+}
+
+.slider-buttons {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 min(24px, 3vw);
+    pointer-events: none;
+    z-index: 10;
+}
+
+.slider-buttons button {
+    pointer-events: auto;
+    background-color: rgba(24, 24, 24, 0.92);
+    backdrop-filter: blur(8px);
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.slider-buttons button:hover {
+    background-color: rgba(35, 35, 35, 0.98);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.slider-buttons button:active {
+    transform: scale(0.95);
+}
+
+.slider-buttons button.swiper-button-disabled {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.slider-status.hero-swiper-pagination {
+    position: static;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 24px;
     padding-bottom: 8px;
 }
 
-.slider-status .slider-dot {
+.slider-status.hero-swiper-pagination .swiper-pagination-bullet {
     width: 12px;
     height: 12px;
-    min-width: 12px;
-    padding: 0;
+    margin: 0 !important;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.35);
-    transition: background-color 0.2s ease, transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.35);
+    opacity: 1;
+    transition: background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
 }
 
-.slider-status .slider-dot.is-active {
-    background-color: #fff;
+.slider-status.hero-swiper-pagination .swiper-pagination-bullet:hover {
+    background: rgba(255, 255, 255, 0.55);
+}
+
+.slider-status.hero-swiper-pagination .swiper-pagination-bullet-active {
+    background: #fff;
     transform: scale(1.2);
-}
-
-.slider-status .slider-dot:hover {
-    transform: translateY(0);
-    background-color: rgba(255, 255, 255, 0.65);
-}
-
-.slider-status .slider-dot.is-active:hover {
-    transform: scale(1.2);
+    box-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
 }
 
 main {
     padding-inline: 100px;
 }
+.main-cards {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .card {
+        width: 100%;
+        margin: 0 20px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #181818;
+        border-radius: 30px;
+        padding: 10px;
+
+        .card-info {
+            width: 100%;
+            background-color: #262626;
+            border-radius: 30px;
+            height: 400px;
+        }
+        .card-name {
+            padding-top: 12px;
+            font-size: 12px;
+            color: #737272;
+        }
+        .card-title {
+            font-size: 30px;
+            font-weight: 600;
+        }
+        .card-cell {
+            font-size: 20px;
+        }
+        .card-cart {
+            margin: 6px;
+            background-color: #06B526;
+            border-radius: 12px;
+            padding: 16px;
+            width: 100%;
+            color: #fff;
+            font-weight: 600;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-more {
+            margin: 6px;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            width: 100%;
+            color: #000;
+            font-weight: 600;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+
 footer {
     padding-inline: 100px;
     padding-top: 24px;
@@ -254,7 +389,7 @@ footer {
     height: 1px;
     width: 100%;
     top: 0;
-    background-color: rgba(255, 255, 255, 0.12);
+    background-color: rgba(255, 255, 255, 0.08);
     margin-bottom: 28px;
 }
 
@@ -283,7 +418,6 @@ footer {
 }
 
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 16px;
     display: flex;
     justify-content: space-between;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IVMAPC | Магазин Компьютерной техники</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,32 +33,149 @@
     </nav>
     <div class="background">
         <header>
-            <h1>Собери свой Первый ПК</h1>
+            <h1>СОБЕРИ СВОЙ ПЕРВЫЙ ПК</h1>
             <section class="slider" aria-roledescription="carousel" aria-label="Слайды">
-                <div class="slider-container">
-                    <div class="slider-track">
-                        <div class="slide first"></div>
-                        <div class="slide second"></div>
-                        <div class="slide third"></div>
-                        <div class="slide fourth"></div>
-                        <div class="slide fifth"></div>
+                <div class="swiper hero-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="slide-card slide-card--1" role="img" aria-label="Слайд 1"></div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide-card slide-card--2" role="img" aria-label="Слайд 2"></div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide-card slide-card--3" role="img" aria-label="Слайд 3"></div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide-card slide-card--4" role="img" aria-label="Слайд 4"></div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="slide-card slide-card--5" role="img" aria-label="Слайд 5"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="slider-buttons">
-                    <button type="button" class="prev" aria-label="Предыдущий слайд"><img src="images/left.svg" alt=""></button>
-                    <button type="button" class="next" aria-label="Следующий слайд"><img src="images/right.svg" alt=""></button>
+                    <button type="button" class="hero-swiper-prev prev" aria-label="Предыдущий слайд"><img src="images/left.svg" alt=""></button>
+                    <button type="button" class="hero-swiper-next next" aria-label="Следующий слайд"><img src="images/right.svg" alt=""></button>
                 </div>
-                <div class="slider-status" role="tablist" aria-label="Номер слайда">
-                    <button type="button" class="slider-dot is-active" data-slide="0" role="tab" aria-selected="true" aria-label="Слайд 1"></button>
-                    <button type="button" class="slider-dot" data-slide="1" role="tab" aria-selected="false" aria-label="Слайд 2"></button>
-                    <button type="button" class="slider-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Слайд 3"></button>
-                    <button type="button" class="slider-dot" data-slide="3" role="tab" aria-selected="false" aria-label="Слайд 4"></button>
-                    <button type="button" class="slider-dot" data-slide="4" role="tab" aria-selected="false" aria-label="Слайд 5"></button>
-                </div>
+                <div class="hero-swiper-pagination slider-status" aria-label="Номер слайда"></div>
             </section>
         </header>
         <main>
-    
+            <section>
+                <h2>Игровые компьютеры</h2>
+                <div class="main-cards">
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Игровой компьютер</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Игровой компьютер</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Игровой компьютер</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Мониторы</h2>
+                <div class="main-cards">
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Монитор</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Монитор</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Монитор</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Клавиатуры</h2>
+                <div class="main-cards">
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Клавиатура</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Клавиатура</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                    <div class="card">
+                        <div class="card-info"></div>
+                        <p class="card-name">Клавиатура</p>
+                        <p class="card-title">CORE X1</p>
+                        <p class="card-cell">81 900 ₽</p>
+                        <button class="card-cart">
+                            <img src="images/cart.svg">
+                            В корзину
+                        </button>
+                        <button class="card-more">Подробнее</button>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     <footer>
@@ -79,11 +197,12 @@
                 <p>Сб-Вс: 11:00 - 19:00</p>
             </div>
         </div>
+        <div class="footer-line"></div>
         <div class="footer-bottom">
             <p>© 2026 IVMAPC. Все права защищены.</p>
-            <p><a href="#">Политика конфиденциальности</a> · <a href="#">Пользовательское соглашение</a></p>
         </div>
     </footer>
-    <script src="main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="slider.js" defer></script>
 </body>
 </html>
