@@ -43,8 +43,6 @@ button:hover {
 }
 
 body {
-    /* display: flex;
-    flex-direction: column; */
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     line-height: 1.5;
@@ -335,6 +333,9 @@ main {
             background-color: #262626;
             border-radius: 30px;
             height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .card-name {
             padding-top: 12px;
