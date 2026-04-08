@@ -13,8 +13,10 @@ nav {
 .nav-links {
     display: flex;
     gap: 30px;
+    padding-inline: 30px;
 }
 .nav-links li {
+    white-space: nowrap;
     display: inline-block;
     transition: transform 0.2s ease;
 }
@@ -36,6 +38,7 @@ nav {
 .user-actions {
     display: flex;
     gap: 30px;
+    padding-left: 30px;
 }
 .user-actions button {
     gap: 10px;
@@ -50,6 +53,7 @@ nav {
     gap: 10px;
     background-color: #D9D9D9;
     border-radius: 5px;
+    width: min(400px, 100%);
 }
 .search-bar input {
     background-color: transparent;
@@ -57,7 +61,7 @@ nav {
     color: #181818;
     font-size: 16px;
     font-weight: 400;
-    width: 300px;
+    width: 100%;
     margin: 10px;
 }
 .search-bar input:focus {
@@ -68,4 +72,41 @@ nav {
 }
 .search-bar button:hover {
     transform: scale(0.95);
+}
+
+.menu-button {
+    display: none;
+}
+
+@media (max-width: 1400px) {
+    .user-actions button p {
+        display: none;
+    }
+    
+}
+
+@media (max-width: 1200px) {
+    .search-bar {
+       display: none;
+    }
+    
+}
+
+@media (max-width: 1000px) {
+    nav {
+        padding-inline: 30px;
+        button img {
+            width: 50px;
+        }
+    }
+    .menu-button {
+       display: block;
+    }
+    .logo {
+        /* position: absolute;
+        width: 50%; */
+    }
+    .nav-links {
+        display: none;
+    }
 }

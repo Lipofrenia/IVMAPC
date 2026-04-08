@@ -21,6 +21,7 @@ h1 {
     font-size: 50px;
     text-align: center;
     width: 100%;
+    padding-inline: 100px;
 }
 
 h2 {

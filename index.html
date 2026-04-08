@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IVMAPC | Магазин Компьютерной техники</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/navigation.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/footer.css">
 </head>
 <body>
     <nav>
-        <img src="images/logo.svg" alt="IVMAPC">
+        <button class="menu-button" type="button">
+            <img src="images/menu.svg" alt="Профиль">
+        </button>
+        <img class="logo" src="images/logo.svg" alt="IVMAPC">
         <ul class="nav-links">
             <li><a class="current-page" href="#">Главная</a></li>
             <li><a href="#">О компании</a></li>
@@ -26,11 +29,11 @@
         <div class="user-actions">
             <button type="button">
                 <img src="images/cart.svg" alt="Корзина">
-                Корзина
+                <p>Корзина</p>
             </button>
             <button type="button">
                 <img src="images/account.svg" alt="Профиль">
-                Профиль
+                <p>Профиль</p>
             </button>
         </div>
     </nav>
