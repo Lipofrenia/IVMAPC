@@ -56,3 +56,16 @@ footer {
 .footer-bottom a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 1000px) {
+    footer {
+        padding-inline: 10px;
+        text-align: center;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

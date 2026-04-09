@@ -3,7 +3,7 @@
     background-image: url("../images/background.svg");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-attachment: fixed;
     padding-bottom: 100px;
 }
@@ -15,12 +15,12 @@ header {
 }
 
 h1 {
-    padding: 20px;
     font-family: 'Y224';
     font-weight: 400;
     font-size: 50px;
     text-align: center;
     width: 100%;
+    padding-block: 20px;
     padding-inline: 100px;
 }
 
@@ -217,19 +217,19 @@ main {
             flex-direction: column;
             &.pk {
                 background-image: url("../images/cards/pk1.png");
-                background-size: cover;
+                background-size: contain;
                 background-position: center;
                 background-repeat: no-repeat;
             }
             &.monik {
                 background-image: url("../images/cards/monik1.png");
-                background-size: cover;
+                background-size: contain;
                 background-position: center;
                 background-repeat: no-repeat;
             }
             &.klava {
                 background-image: url("../images/cards/klava1.png");
-                background-size: cover;
+                background-size: contain;
                 background-position: center;
                 background-repeat: no-repeat;
             }
@@ -318,5 +318,32 @@ main {
             transform: scale(0.99);
             background-color: #e3e3e3;
         }
+    }
+}
+
+@media (max-width: 1200px) {
+    main {
+        padding-inline: 50px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .slider-buttons {
+        display: none;
+    }
+    h1 {
+        font-size: 32px;
+        padding-inline: 10px;
+    }
+    h2 {
+        font-size: 32px;
+        width: 100%;
+        text-align: center;
+    }
+    .main-cards {
+        flex-direction: column;
+    }
+    main {
+        padding-inline: 10px;
     }
 }

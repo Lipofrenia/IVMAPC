@@ -95,18 +95,23 @@ nav {
 @media (max-width: 1000px) {
     nav {
         padding-inline: 30px;
-        button img {
-            width: 50px;
-        }
     }
     .menu-button {
        display: block;
     }
     .logo {
-        /* position: absolute;
-        width: 50%; */
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
     }
     .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .user-actions {
         display: none;
     }
 }
