@@ -1,0 +1,52 @@
+.background {
+    min-height: 500px;
+    background-image: url("../images/background.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    padding-bottom: 50px;
+}
+
+main {
+    padding-inline: 100px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 48px;
+}
+h2 {
+    text-align: center;
+    font-size: 32px;
+    color: #b6b6b6
+}
+
+.catalog-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+.item {
+    background-color: #181818;
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    height: 350px;
+}
+.item:hover {
+    transform: scale(0.99);
+}
+.item-1 {
+grid-column: span 6; 
+}
+ .item-2, .item-3 {
+grid-column: span 3;
+}
+
+.item-4, .item-5, .item-6 {
+grid-column: span 2;
+}

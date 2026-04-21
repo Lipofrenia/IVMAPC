@@ -6,7 +6,7 @@
     <title>IVMAPC | Магазин Компьютерной техники</title>
     <link rel="stylesheet" href="styles/normalize.css">
     <link rel="stylesheet" href="styles/navigation.css">
-    <link rel="stylesheet" href="styles/autorization.css">
+    <link rel="stylesheet" href="styles/catalog.css">
     <link rel="stylesheet" href="styles/footer.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
             <li><a href="index.html">Главная</a></li>
             <li><a href="#">О компании</a></li>
             <li><a href="#">Контакты</a></li>
-            <li><a href="catalog.html">Каталог</a></li>
+            <li><a class="current-page" href="catalog.html">Каталог</a></li>
         </ul>
         <div class="search-bar">
             <input type="text" placeholder="Поиск">
@@ -30,27 +30,23 @@
                 <img src="images/cart.svg" alt="Корзина">
                 <p>Корзина</p>
             </button>
-            <button class="current-page" type="button" onclick="document.location='autorization.html'">
+            <button type="button" onclick="document.location='autorization.html'">
                 <img src="images/account.svg" alt="Профиль">
-                <p class="current-page">Профиль</p>
+                <p>Профиль</p>
             </button>
         </div>
     </nav>
     <div class="background">
         <main>
-            <div class="form">
-                <h1>Вход в личный кабинет</h1>
-                <div class="input">
-                    <input type="email" placeholder="Номер телефона/электронная почта">
-                </div>
-                <div class="input">
-                    <input type="password" placeholder="Пароль">
-                </div>
-                <button class="autorize" onclick="document.location='profile.html'">Войти</button>
-                <div class="register">
-                    <a href="#">Забыли пароль?</a>
-                    <a href="#">Зарегестрироваться</a>
-                </div>
+            <h1>Каталог товаров</h1>
+            <h2>Все необходимое для того, чтобы собрать свой персональный компьютер</h2>
+            <div class="catalog-nav">
+                <button class="item item-1">1</button>
+                <button class="item item-2">2</button>
+                <button class="item item-3">3</button>
+                <button class="item item-4">4</button>
+                <button class="item item-5">5</button>
+                <button class="item item-6">6</button>
             </div>
         </main>
     </div>
