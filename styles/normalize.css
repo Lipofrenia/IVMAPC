@@ -17,6 +17,12 @@
     font-weight: 600;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Inter';
+    src: url('../fonts/Inter/Inter-LightItalic.otf') format('opentype');
+    font-weight: 200;
+    font-style: italic;
+}
 
 @font-face {
     font-family: 'Y224';
