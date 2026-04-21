@@ -25,6 +25,30 @@ main {
     border-radius: 50px;
 }
 
+.form--auth-alt {
+    height: auto;
+    min-height: 530px;
+    padding-block: 44px;
+    gap: 24px;
+}
+
+.form-lead {
+    margin: -8px 0 0;
+    padding-inline: 24px;
+    max-width: 520px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 200;
+    line-height: 1.5;
+    color: #b6b6b6;
+}
+
+.register--center {
+    justify-content: center;
+    height: auto;
+    min-height: 0;
+}
+
 h1 {
     font-size: 64px;
     text-align: center; 
@@ -120,5 +144,14 @@ input:-webkit-autofill:focus {
         height: auto;
         align-items: center;
         gap: 12px;
+    }
+
+    .form--auth-alt {
+        padding-block: 28px;
+    }
+
+    .form-lead {
+        padding-inline: 8px;
+        font-size: 14px;
     }
 }
