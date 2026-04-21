@@ -72,6 +72,12 @@ input:-webkit-autofill:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.autorize:hover {
+    background-color: #232323;
+    border-color: #565656;
 }
 
 .register {
@@ -84,4 +90,35 @@ input:-webkit-autofill:focus {
     text-decoration: none;
     color: #D9D9D9;
     font-weight: 200;
+}
+
+@media (max-width: 900px) {
+    main {
+        padding-inline: 16px;
+        padding-top: 24px;
+    }
+
+    .form {
+        height: auto;
+        padding: 28px 16px;
+        border-radius: 24px;
+        gap: 20px;
+    }
+
+    h1 {
+        font-size: 34px;
+    }
+
+    .input,
+    .autorize,
+    .register {
+        width: min(520px, 100%);
+    }
+
+    .register {
+        flex-direction: column;
+        height: auto;
+        align-items: center;
+        gap: 12px;
+    }
 }
