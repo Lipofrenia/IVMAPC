@@ -8,12 +8,6 @@
     padding-bottom: 100px;
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    color: #fff;
-}
-
 h1 {
     font-family: 'Y224';
     font-weight: 400;

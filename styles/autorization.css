@@ -80,6 +80,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:focus {
     box-shadow: 0 0 0 1000px #D9D9D9 inset !important;
     -webkit-text-fill-color: #181818 !important;
+    font-size: 20px !important;
     caret-color: #000;
 }
 
