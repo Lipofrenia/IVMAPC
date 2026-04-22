@@ -1,0 +1,47 @@
+.background {
+    min-height: 500px;
+    background-image: url("../images/background.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    background-attachment: fixed;
+}
+
+/* main {
+    display: flex;
+} */
+
+h1 {
+    text-align: center;
+    font-size: 48px;
+    padding: 10px;
+}
+.line {
+    height: 2px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+section {
+    display: flex;
+    height: 100rem;
+    width: 100%;
+}
+aside {
+    position: sticky;
+    display: flex;
+    background-color: red;
+    top: 0;
+    /* left: 0; */
+    height: 100%;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+}
+.catalog-content {
+    display: grid;
+    width: 100%;
+    background-color: blue;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
