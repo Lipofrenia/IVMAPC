@@ -1,0 +1,96 @@
+.background {
+  min-height: 500px;
+  background-image: url("../images/background.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  padding-bottom: 50px;
+}
+
+main {
+  padding-inline: 100px;
+}
+
+h1 {
+  font-weight: 400;
+  font-size: 50px;
+  text-align: center;
+  width: 100%;
+  padding-block: 20px;
+  padding-inline: 100px;
+}
+
+main ul {
+  list-style: none; /* убираем маркеры */
+  padding: 0; /* убираем внутренние отступы */
+  margin: 0; /* убираем внешние отступы */
+  width: 100%;
+}
+
+/* Строка-заголовок - flex-контейнер */
+.table_header {
+  display: flex;
+  background-color: #181818;
+
+  /* Отступы вокруг всей строки */
+  margin-right: 2rem;
+  margin-left: 2rem;
+  padding: 0;
+}
+
+/* Все ячейки внутри заголовка */
+.table_header div {
+  /* или можно задать конкретную ширину: */
+  /* width: 25%; */
+
+  /* Отступы внутри ячеек */
+  padding: 1.5em 1.5em; /* внутренние отступы */
+  margin: 0; /* внешние отступы */
+
+  /* Текст */
+  color: #979797;
+  font-size: 1.4em; /* размер шрифта */
+  /* font-family:  */
+}
+
+.product {
+  text-align: left;
+  padding: 0 0 0 5em;
+  width: 40%;
+}
+
+.availability {
+  text-align: left;
+  width: 18%;
+}
+
+.count {
+  text-align: left;
+  width: 18%;
+}
+
+.price {
+  text-align: left;
+  width: 24%;
+}
+
+.table_items {
+  display: flex;
+  background-color: #111111;
+  margin-right: 2rem;
+  margin-left: 2rem;
+  padding: 0;
+}
+
+.product_img {
+  text-align: left;
+  padding: 0 0 0 2em;
+  width: 40%;
+}
+
+.item_imgage {
+  object-fit: cover;
+  width: 20%;
+  height: 7em;
+}

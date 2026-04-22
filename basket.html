@@ -6,7 +6,7 @@
     <title>IVMAPC | Магазин Компьютерной техники</title>
     <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/navigation.css" />
-    <link rel="stylesheet" href="styles/profile.css" />
+    <link rel="stylesheet" href="styles/basket.css" />
     <link rel="stylesheet" href="styles/footer.css" />
   </head>
   <body>
@@ -61,11 +61,7 @@
             <img src="images/cart.svg" alt="Корзина" />
             <p>Корзина</p>
           </button>
-          <button
-            class="current-page"
-            type="button"
-            onclick="document.location='autorization.html'"
-          >
+          <button type="button" onclick="document.location='autorization.html'">
             <img src="images/account.svg" alt="Профиль" />
             <p class="current-page">Профиль</p>
           </button>
@@ -105,25 +101,29 @@
     </header>
     <div class="background">
       <main>
-        <div class="info">
-          <div class="prof-info">
-            <img src="images/profile-photo.png" alt="profile" />
-            <h1>Username</h1>
-            <div class="line"></div>
-            <h2>bruhmail@mail.ru</h2>
-            <h2>8 (800) 555 35-35</h2>
-            <button class="settings">Настройки</button>
-          </div>
-          <div class="order-info">
-            <div class="order-nav">
-              <button class="my-orders">Мои заказы</button>
-              <button class="favourites">Избранное</button>
+        <h1>Корзина</h1>
+        <ul>
+          <li class="table_header">
+            <div class="product">Товар</div>
+            <div class="availability">Наличие</div>
+            <div class="count">Количество</div>
+            <div class="price">Цена</div>
+          </li>
+          <li class="table_items">
+            <div class="product_img">
+              <img
+                src="images/cards/monik1.png"
+                alt="product1"
+                class="item_imgage"
+              />
             </div>
-            <div class="order-content">
-              <p class="not-content">Вы пока ничего не заказали</p>
-            </div>
-          </div>
-        </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </li>
+        </ul>
       </main>
     </div>
     <footer>
