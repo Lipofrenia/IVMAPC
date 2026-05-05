@@ -1,60 +1,413 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IVMAPC | Страница товара</title>
-    <link rel="stylesheet" href="../styles/normalize.css">
-    <link rel="stylesheet" href="../styles/navigation.css">
-    <link rel="stylesheet" href="../styles/footer.css">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Измените title под каждый продукт -->
+    <title>IVMAPC | Игровой компьютер CORE X1</title>
+    <link rel="stylesheet" href="../styles/normalize.css" />
+    <link rel="stylesheet" href="../styles/navigation.css" />
+    <link rel="stylesheet" href="../styles/product.css" />
+    <link rel="stylesheet" href="../styles/footer.css" />
+  </head>
+  <body>
+    <!-- ==================== HEADER (один в один с других страниц) ==================== -->
     <header class="site-header">
-        <nav>
-            <button class="menu-button" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-links">
-                <img src="../images/menu.svg" alt="">
+      <nav>
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="Открыть меню"
+          aria-expanded="false"
+          aria-controls="nav-links"
+        >
+          <img src="../images/menu.svg" alt="" />
+        </button>
+        <a class="logo-link" href="../index.html">
+          <img class="logo" src="../images/logo.svg" alt="IVMAPC" />
+        </a>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="../index.html">Главная</a></li>
+          <li>
+            <button
+              type="button"
+              class="nav-flyout-trigger"
+              data-nav-panel="company"
+              aria-expanded="false"
+              aria-controls="nav-content-company"
+            >
+              О компании
             </button>
-            <a class="logo-link" href="../index.html"><img class="logo" src="../images/logo.svg" alt="IVMAPC"></a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="../index.html">Главная</a></li>
-                <li><a href="../catalog.html">Каталог</a></li>
-            </ul>
-            <div class="search-bar">
-                <input type="text" placeholder="Поиск">
-                <button type="submit"><img src="../images/research.svg" alt="Find"></button>
-            </div>
-        </nav>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="nav-flyout-trigger"
+              data-nav-panel="contacts"
+              aria-expanded="false"
+              aria-controls="nav-content-contacts"
+            >
+              Контакты
+            </button>
+          </li>
+          <li><a class="current-page" href="../catalog.html">Каталог</a></li>
+        </ul>
+        <div class="search-bar">
+          <input type="text" placeholder="Поиск" />
+          <button type="submit">
+            <img src="../images/research.svg" alt="Find" />
+          </button>
+        </div>
+        <div class="user-actions">
+          <button type="button" onclick="document.location='../basket.html'">
+            <img src="../images/cart.svg" alt="Корзина" />
+            <p>Корзина</p>
+          </button>
+          <button type="button" onclick="document.location='../autorization.html'">
+            <img src="../images/account.svg" alt="Профиль" />
+            <p>Профиль</p>
+          </button>
+        </div>
+      </nav>
+      <div
+        class="nav-flyout"
+        id="nav-flyout"
+        role="region"
+        aria-label="Дополнительная информация"
+      >
+        <div id="nav-content-company" class="nav-flyout-panel" hidden>
+          <div class="nav-flyout-inner">
+            <h3 class="nav-flyout-title">Компания IVMAPC</h3>
+            <p class="nav-flyout-text">
+              Компания IVMAPC была основана в 2026 году. Мы — официальный
+              партнер таких известных технологических гигантов как NVIDIA,
+              Intel, Microsoft. Нам также удалось реализовать несколько успешных
+              совместных проектов с такими известными игровыми компаниями как
+              Wargaming, UbiSoft, Electronic Arts, Bethesda и Mail.Games.
+            </p>
+          </div>
+        </div>
+        <div id="nav-content-contacts" class="nav-flyout-panel" hidden>
+          <div class="nav-flyout-inner">
+            <h3 class="nav-flyout-title">Контакты</h3>
+            <p class="nav-flyout-text">
+              Тел.: +7 (800) 555-35-35, email: info@ivmapc.ru
+            </p>
+            <p class="nav-flyout-text">
+              г. Орел, ул. Центральная, 67. Пн–Пт: 10:00–21:00, Сб–Вс:
+              11:00–19:00
+            </p>
+          </div>
+        </div>
+      </div>
     </header>
-    <main style="min-height: 60vh; display: grid; place-items: center; padding: 24px;">
-        <section style="max-width: 760px; width: 100%; background: #111; border: 1px solid #242424; border-radius: 16px; padding: 24px; text-align: center;">
-            <h1 style="margin: 0 0 10px; font-size: 40px;">Страница товара</h1>
-            <p style="margin: 0; color: #b6b6b6;">Пока шаблон. Здесь будет подробное описание, характеристики и покупка.</p>
+    <!-- ==================== END HEADER ==================== -->
+
+    <div class="background">
+      <main>
+        <!-- ==================== БЛОК ПРОДУКТА ==================== -->
+        <section class="product-section">
+
+          <!-- ГАЛЕРЕЯ ИЗОБРАЖЕНИЙ — замените src на фото продукта -->
+          <div class="product-gallery">
+            <div class="product-gallery__main">
+              <img
+                id="main-image"
+                src="../images/cards/pk1.png"
+                alt="Игровой компьютер CORE X1 — вид спереди"
+                class="product-gallery__main-img"
+              />
+            </div>
+            <div class="product-gallery__thumbs" role="list" aria-label="Миниатюры">
+              <button
+                class="product-gallery__thumb active"
+                type="button"
+                aria-label="Вид спереди"
+                data-img="../images/cards/pk1.png"
+              >
+                <img src="../images/cards/pk1.png" alt="Вид спереди" />
+              </button>
+              <button
+                class="product-gallery__thumb"
+                type="button"
+                aria-label="Вид сбоку"
+                data-img="../images/cards/pk1.png"
+              >
+                <img src="../images/cards/pk1.png" alt="Вид сбоку" />
+              </button>
+              <button
+                class="product-gallery__thumb"
+                type="button"
+                aria-label="Вид сзади"
+                data-img="../images/cards/pk1.png"
+              >
+                <img src="../images/cards/pk1.png" alt="Вид сзади" />
+              </button>
+              <button
+                class="product-gallery__thumb"
+                type="button"
+                aria-label="Детали"
+                data-img="../images/cards/pk1.png"
+              >
+                <img src="../images/cards/pk1.png" alt="Детали" />
+              </button>
+            </div>
+          </div>
+
+          <!-- ИНФОРМАЦИЯ О ПРОДУКТЕ -->
+          <div class="product-info">
+
+            <!-- Категория и название — замените под продукт -->
+            <p class="product-info__category">Игровой компьютер</p>
+            <h1 class="product-info__title">CORE X1</h1>
+
+            <!-- Статус наличия -->
+            <div class="product-info__status">
+              <div class="info-line">
+                <div class="in-stock">
+                  <div class="mark-status green"></div>
+                  <p>В наличии</p>
+                </div>
+                <div class="count">
+                  <div class="mark-status blue"></div>
+                  <!-- Обновите количество -->
+                  <p>Осталось: 12 шт.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Цена — обновите -->
+            <p class="product-info__price">81 900 ₽</p>
+
+            <!-- Краткое описание — меняйте под продукт -->
+            <p class="product-info__desc">
+              Готовая игровая сборка на базе Intel Core i5 12-го поколения
+              с видеокартой NVIDIA GeForce RTX 4060. Идеальный выбор для
+              комфортной игры в 1080p и 1440p. Тихое охлаждение, стильный
+              корпус с подсветкой, быстрый SSD.
+            </p>
+
+            <!-- Кнопки действий -->
+            <div class="product-info__actions">
+              <button class="btn-cart" type="button">
+                <img src="../images/cart.svg" alt="" />
+                В корзину
+              </button>
+              <button class="btn-buy" type="button">
+                Купить сейчас
+              </button>
+            </div>
+
+            <!-- Быстрые характеристики — меняйте под продукт -->
+            <ul class="product-info__quick-specs">
+              <li>
+                <span class="spec-label">Процессор</span>
+                <span class="spec-value">Intel Core i5-12400F</span>
+              </li>
+              <li>
+                <span class="spec-label">Видеокарта</span>
+                <span class="spec-value">NVIDIA GeForce RTX 4060 8 ГБ</span>
+              </li>
+              <li>
+                <span class="spec-label">ОЗУ</span>
+                <span class="spec-value">16 ГБ DDR5</span>
+              </li>
+              <li>
+                <span class="spec-label">Накопитель</span>
+                <span class="spec-value">SSD 512 ГБ NVMe</span>
+              </li>
+              <li>
+                <span class="spec-label">ОС</span>
+                <span class="spec-value">Windows 11 Home</span>
+              </li>
+            </ul>
+          </div>
         </section>
-    </main>
+
+        <!-- ==================== ТАБЫ: ОПИСАНИЕ / ХАРАКТЕРИСТИКИ / ГАРАНТИЯ ==================== -->
+        <section class="product-tabs">
+          <div class="product-tabs__nav" role="tablist">
+            <button
+              class="product-tabs__tab active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              aria-controls="tab-desc"
+              data-tab="desc"
+            >
+              Описание
+            </button>
+            <button
+              class="product-tabs__tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              aria-controls="tab-specs"
+              data-tab="specs"
+            >
+              Характеристики
+            </button>
+          </div>
+
+          <!-- Описание — меняйте текст под продукт -->
+          <div
+            class="product-tabs__content active"
+            id="tab-desc"
+            role="tabpanel"
+          >
+            <p>
+              <strong>CORE X1</strong> — это готовая игровая система, собранная
+              нашими специалистами с использованием только проверенных
+              комплектующих ведущих мировых производителей.
+            </p>
+            <p>
+              Процессор Intel Core i5-12400F обеспечивает плавную работу в
+              современных играх, а видеокарта NVIDIA GeForce RTX 4060 позволяет
+              запускать игры с трассировкой лучей на высоких настройках
+              графики в разрешении Full HD и QHD.
+            </p>
+            <p>
+              Стильный корпус с RGB-подсветкой, закалённое стекло на боковой
+              панели и продуманная система вентиляции позволяют поддерживать
+              оптимальный температурный режим даже при длительных игровых
+              сессиях.
+            </p>
+            <p>
+              Система полностью готова к использованию — достаточно подключить
+              монитор, клавиатуру и мышь. Windows 11 Home уже установлена
+              и активирована.
+            </p>
+          </div>
+
+          <!-- Полные характеристики — меняйте под продукт -->
+          <div
+            class="product-tabs__content"
+            id="tab-specs"
+            role="tabpanel"
+            hidden
+          >
+            <table class="specs-table">
+              <tbody>
+                <tr>
+                  <th colspan="2" class="specs-table__group">Процессор</th>
+                </tr>
+                <tr>
+                  <td>Модель</td>
+                  <td>Intel Core i5-12400F</td>
+                </tr>
+                <tr>
+                  <td>Количество ядер</td>
+                  <td>6 (12 потоков)</td>
+                </tr>
+                <tr>
+                  <td>Тактовая частота</td>
+                  <td>до 4.4 ГГц (Turbo Boost)</td>
+                </tr>
+                <tr>
+                  <th colspan="2" class="specs-table__group">Видеокарта</th>
+                </tr>
+                <tr>
+                  <td>Модель</td>
+                  <td>NVIDIA GeForce RTX 4060</td>
+                </tr>
+                <tr>
+                  <td>Объём VRAM</td>
+                  <td>8 ГБ GDDR6</td>
+                </tr>
+                <tr>
+                  <td>Поддержка DLSS</td>
+                  <td>DLSS 3.0</td>
+                </tr>
+                <tr>
+                  <th colspan="2" class="specs-table__group">Память</th>
+                </tr>
+                <tr>
+                  <td>Объём ОЗУ</td>
+                  <td>16 ГБ</td>
+                </tr>
+                <tr>
+                  <td>Тип памяти</td>
+                  <td>DDR5-4800</td>
+                </tr>
+                <tr>
+                  <th colspan="2" class="specs-table__group">Накопитель</th>
+                </tr>
+                <tr>
+                  <td>Тип</td>
+                  <td>SSD NVMe M.2</td>
+                </tr>
+                <tr>
+                  <td>Объём</td>
+                  <td>512 ГБ</td>
+                </tr>
+                <tr>
+                  <th colspan="2" class="specs-table__group">Система</th>
+                </tr>
+                <tr>
+                  <td>Операционная система</td>
+                  <td>Windows 11 Home (лицензия)</td>
+                </tr>
+                <tr>
+                  <td>Материнская плата</td>
+                  <td>MSI PRO B660M-A DDR5</td>
+                </tr>
+                <tr>
+                  <td>Блок питания</td>
+                  <td>600 Вт, 80+ Bronze</td>
+                </tr>
+                <tr>
+                  <td>Корпус</td>
+                  <td>Mid-Tower, RGB, боковое стекло</td>
+                </tr>
+                <tr>
+                  <th colspan="2" class="specs-table__group">Габариты</th>
+                </tr>
+                <tr>
+                  <td>Размер корпуса</td>
+                  <td>395 × 200 × 420 мм</td>
+                </tr>
+                <tr>
+                  <td>Масса</td>
+                  <td>8.5 кг</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ==================== FOOTER (один в один с других страниц) ==================== -->
     <footer>
-        <div class="footer-line"></div>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>IVMAPC</h3>
-                <p>Магазин компьютерной техники и комплектующих для сборки ПК под любые задачи: учеба, работа и игры.</p>
-            </div>
-            <div class="footer-column">
-                <h3>Контакты</h3>
-                <p>Телефон: +7 (800) 555 35-35</p>
-                <p>Email: info@ivmapc.ru</p>
-                <p>г. Орел, ул. Центральная, 67</p>
-            </div>
-            <div class="footer-column">
-                <h3>Режим работы</h3>
-                <p>Пн-Пт: 10:00 - 21:00</p>
-                <p>Сб-Вс: 11:00 - 19:00</p>
-            </div>
+      <div class="footer-line"></div>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>IVMAPC</h3>
+          <p>
+            Магазин компьютерной техники и комплектующих для сборки ПК под
+            любые задачи: учеба, работа и игры.
+          </p>
         </div>
-        <div class="footer-line"></div>
-        <div class="footer-bottom">
-            <p>© 2026 IVMAPC. Все права защищены.</p>
+        <div class="footer-column">
+          <h3>Контакты</h3>
+          <p>Телефон: +7 (800) 555 35-35</p>
+          <p>Email: info@ivmapc.ru</p>
+          <p>г. Орел, ул. Центральная, 67</p>
         </div>
+        <div class="footer-column">
+          <h3>Режим работы</h3>
+          <p>Пн-Пт: 10:00 - 21:00</p>
+          <p>Сб-Вс: 11:00 - 19:00</p>
+        </div>
+      </div>
+      <div class="footer-line"></div>
+      <div class="footer-bottom">
+        <p>© 2026 IVMAPC. Все права защищены.</p>
+      </div>
     </footer>
+    <!-- ==================== END FOOTER ==================== -->
+
     <script src="../scripts/nav-panels.js" defer></script>
-</body>
+    <script src="../scripts/product.js" defer></script>
+  </body>
 </html>
