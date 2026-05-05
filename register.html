@@ -6,7 +6,7 @@
     <title>IVMAPC | Регистрация</title>
     <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/navigation.css" />
-    <link rel="stylesheet" href="styles/autorization.css" />
+    <link rel="stylesheet" href="styles/authorization.css" />
     <link rel="stylesheet" href="styles/footer.css" />
   </head>
   <body>
@@ -17,13 +17,12 @@
           type="button"
           aria-label="Открыть меню"
           aria-expanded="false"
-          aria-controls="nav-links"
-        >
+          aria-controls="nav-links">
           <img src="images/menu.svg" alt="" />
         </button>
-        <a class="logo-link" href="index.html"
-          ><img class="logo" src="images/logo.svg" alt="IVMAPC"
-        /></a>
+        <a class="logo-link" href="index.html">
+          <img class="logo" src="images/logo.svg" alt="IVMAPC"/>
+        </a>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">Главная</a></li>
           <li>
@@ -32,8 +31,7 @@
               class="nav-flyout-trigger"
               data-nav-panel="company"
               aria-expanded="false"
-              aria-controls="nav-content-company"
-            >
+              aria-controls="nav-content-company">
               О компании
             </button>
           </li>
@@ -43,8 +41,7 @@
               class="nav-flyout-trigger"
               data-nav-panel="contacts"
               aria-expanded="false"
-              aria-controls="nav-content-contacts"
-            >
+              aria-controls="nav-content-contacts">
               Контакты
             </button>
           </li>
@@ -64,8 +61,7 @@
           <button
             class="current-page"
             type="button"
-            onclick="document.location='autorization.html'"
-          >
+            onclick="document.location='authorization.html'">
             <img src="images/account.svg" alt="Профиль" />
             <p class="current-page">Профиль</p>
           </button>
@@ -75,8 +71,7 @@
         class="nav-flyout"
         id="nav-flyout"
         role="region"
-        aria-label="Дополнительная информация"
-      >
+        aria-label="Дополнительная информация">
         <div id="nav-content-company" class="nav-flyout-panel" hidden>
           <div class="nav-flyout-inner">
             <h3 class="nav-flyout-title">Компания IVMAPC</h3>
@@ -115,34 +110,30 @@
               type="email"
               name="email"
               autocomplete="email"
-              placeholder="Электронная почта"
-            />
+              placeholder="Электронная почта"/>
           </div>
           <div class="input">
             <input
               type="password"
               name="password"
               autocomplete="new-password"
-              placeholder="Пароль"
-            />
+              placeholder="Пароль"/>
           </div>
           <div class="input">
             <input
               type="password"
               name="password-confirm"
               autocomplete="new-password"
-              placeholder="Подтвердите пароль"
-            />
+              placeholder="Подтвердите пароль"/>
           </div>
           <button
             type="button"
-            class="autorize"
-            onclick="document.location='profile.html'"
-          >
+            class="authorize"
+            onclick="document.location='profile.html'">
             Зарегистрироваться
           </button>
           <div class="register register--center">
-            <a href="autorization.html">Уже есть аккаунт? Войти</a>
+            <a href="authorization.html">Уже есть аккаунт? Войти</a>
           </div>
         </div>
       </main>

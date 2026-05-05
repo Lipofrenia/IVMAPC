@@ -80,7 +80,7 @@ h2 {
 }
 .item-1 {
     grid-column: span 6;
-    background-image: url("../images/katalog/kompi.png");
+    background-image: url("../images/catalog/kompi.png");
 }
 .item-2, .item-3 {
     grid-column: span 3;
@@ -91,23 +91,23 @@ h2 {
 }
 
 .item-2 {
-    background-image: url("../images/katalog/klava.png");
+    background-image: url("../images/catalog/klava.png");
 }
 
 .item-3 {
-    background-image: url("../images/katalog/monitor.png");
+    background-image: url("../images/catalog/monitor.png");
 }
 
 .item-4 {
-    background-image: url("../images/katalog/naushnik.png");
+    background-image: url("../images/catalog/naushnik.png");
 }
 
 .item-5 {
-    background-image: url("../images/katalog/mish.png");
+    background-image: url("../images/catalog/mish.png");
 }
 
 .item-6 {
-    background-image: url("../images/katalog/micro.png");
+    background-image: url("../images/catalog/micro.png");
 }
 
 @media (max-width: 1200px) {

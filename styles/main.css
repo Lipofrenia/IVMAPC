@@ -215,13 +215,13 @@ main {
                 background-position: center;
                 background-repeat: no-repeat;
             }
-            &.monik {
+            &.monitor {
                 background-image: url("../images/cards/monik1.png");
                 background-size: contain;
                 background-position: center;
                 background-repeat: no-repeat;
             }
-            &.klava {
+            &.keyboard {
                 background-image: url("../images/cards/klava1.png");
                 background-size: contain;
                 background-position: center;

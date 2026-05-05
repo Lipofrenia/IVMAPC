@@ -17,13 +17,12 @@
           type="button"
           aria-label="Открыть меню"
           aria-expanded="false"
-          aria-controls="nav-links"
-        >
+          aria-controls="nav-links">
           <img src="images/menu.svg" alt="" />
         </button>
-        <a class="logo-link" href="index.html"
-          ><img class="logo" src="images/logo.svg" alt="IVMAPC"
-        /></a>
+        <a class="logo-link" href="index.html">
+          <img class="logo" src="images/logo.svg" alt="IVMAPC"/>
+        </a>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">Главная</a></li>
           <li>
@@ -32,8 +31,7 @@
               class="nav-flyout-trigger"
               data-nav-panel="company"
               aria-expanded="false"
-              aria-controls="nav-content-company"
-            >
+              aria-controls="nav-content-company">
               О компании
             </button>
           </li>
@@ -43,8 +41,7 @@
               class="nav-flyout-trigger"
               data-nav-panel="contacts"
               aria-expanded="false"
-              aria-controls="nav-content-contacts"
-            >
+              aria-controls="nav-content-contacts">
               Контакты
             </button>
           </li>
@@ -61,7 +58,7 @@
             <img src="images/cart.svg" alt="Корзина" />
             <p>Корзина</p>
           </button>
-          <button type="button" onclick="document.location='autorization.html'">
+          <button type="button" onclick="document.location='authorization.html'">
             <img src="images/account.svg" alt="Профиль" />
             <p>Профиль</p>
           </button>
@@ -71,8 +68,7 @@
         class="nav-flyout"
         id="nav-flyout"
         role="region"
-        aria-label="Дополнительная информация"
-      >
+        aria-label="Дополнительная информация">
         <div id="nav-content-company" class="nav-flyout-panel" hidden>
           <div class="nav-flyout-inner">
             <h3 class="nav-flyout-title">Компания IVMAPC</h3>
@@ -106,34 +102,33 @@
           Все необходимое для того, чтобы собрать свой персональный компьютер
         </h2>
         <div class="catalog-nav">
-          <button class="item item-1" type="button">
+          <button class="item item-1" type="button" onclick="document.location='catalog-pages/computers.html'">
             <span class="item-tag">Сборки</span>
             <span class="item-title">Готовые игровые ПК</span>
             <span class="item-subtitle"
-              >Мощные конфигурации для игр и стриминга</span
-            >
+              >Мощные конфигурации для игр и стриминга</span>
           </button>
-          <button class="item item-2" type="button">
+          <button class="item item-2" type="button" onclick="document.location='catalog-pages/keyboards.html'">
             <span class="item-tag">Периферия</span>
             <span class="item-title">Клавиатуры</span>
             <span class="item-subtitle">Механика и мембрана</span>
           </button>
-          <button class="item item-3" type="button">
+          <button class="item item-3" type="button" onclick="document.location='catalog-pages/monitors.html'">
             <span class="item-tag">Периферия</span>
             <span class="item-title">Мониторы</span>
             <span class="item-subtitle">От 24 до 34 дюймов</span>
           </button>
-          <button class="item item-4" type="button">
+          <button class="item item-4" type="button" onclick="document.location='catalog-pages/headphones.html'">
             <span class="item-tag">Периферия</span>
             <span class="item-title">Наушники</span>
             <span class="item-subtitle">Погружение в звук</span>
           </button>
-          <button class="item item-5" type="button">
+          <button class="item item-5" type="button" onclick="document.location='catalog-pages/mice.html'">
             <span class="item-tag">Периферия</span>
             <span class="item-title">Мышки</span>
             <span class="item-subtitle">Контроль в каждом клике</span>
           </button>
-          <button class="item item-6" type="button">
+          <button class="item item-6" type="button" onclick="document.location='catalog-pages/microphones.html'">
             <span class="item-tag">Периферия</span>
             <span class="item-title">Микрофоны</span>
             <span class="item-subtitle">Чистый голос</span>

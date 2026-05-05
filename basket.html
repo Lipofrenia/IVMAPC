@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
@@ -17,13 +17,12 @@
           type="button"
           aria-label="Открыть меню"
           aria-expanded="false"
-          aria-controls="nav-links"
-        >
+          aria-controls="nav-links">
           <img src="images/menu.svg" alt="" />
         </button>
-        <a class="logo-link" href="index.html"
-          ><img class="logo" src="images/logo.svg" alt="IVMAPC"
-        /></a>
+        <a class="logo-link" href="index.html">
+          <img class="logo" src="images/logo.svg" alt="IVMAPC"/>
+        </a>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">Главная</a></li>
           <li>
@@ -32,8 +31,7 @@
               class="nav-flyout-trigger"
               data-nav-panel="company"
               aria-expanded="false"
-              aria-controls="nav-content-company"
-            >
+              aria-controls="nav-content-company">
               О компании
             </button>
           </li>
@@ -43,8 +41,7 @@
               class="nav-flyout-trigger"
               data-nav-panel="contacts"
               aria-expanded="false"
-              aria-controls="nav-content-contacts"
-            >
+              aria-controls="nav-content-contacts">
               Контакты
             </button>
           </li>
@@ -57,11 +54,14 @@
           </button>
         </div>
         <div class="user-actions">
-          <button type="button" onclick="document.location='basket.html'">
+          <button
+            class="current-page"
+            type="button" 
+            onclick="document.location='basket.html'">
             <img src="images/cart.svg" alt="Корзина" />
             <p>Корзина</p>
           </button>
-          <button type="button" onclick="document.location='autorization.html'">
+          <button type="button" onclick="document.location='authorization.html'">
             <img src="images/account.svg" alt="Профиль" />
             <p class="current-page">Профиль</p>
           </button>
@@ -71,8 +71,7 @@
         class="nav-flyout"
         id="nav-flyout"
         role="region"
-        aria-label="Дополнительная информация"
-      >
+        aria-label="Дополнительная информация">
         <div id="nav-content-company" class="nav-flyout-panel" hidden>
           <div class="nav-flyout-inner">
             <h3 class="nav-flyout-title">Компания IVMAPC</h3>
@@ -101,29 +100,85 @@
     </header>
     <div class="background">
       <main>
-        <h1>Корзина</h1>
-        <ul>
-          <li class="table_header">
-            <div class="product">Товар</div>
-            <div class="availability">Наличие</div>
-            <div class="count">Количество</div>
-            <div class="price">Цена</div>
-          </li>
-          <li class="table_items">
-            <div class="product_img">
-              <img
-                src="images/cards/monik1.png"
-                alt="product1"
-                class="item_imgage"
-              />
+        <section class="basket">
+          <div class="basket-header">
+            <h1>Корзина</h1>
+            <p class="basket-subtitle">2 товара на сумму 124 800 ₽</p>
+          </div>
+
+          <div class="basket-table" role="table" aria-label="Товары в корзине">
+            <div class="basket-row basket-row--head" role="row">
+              <div class="cell cell-product" role="columnheader">Товар</div>
+              <div class="cell cell-availability" role="columnheader">Наличие</div>
+              <div class="cell cell-quantity" role="columnheader">Количество</div>
+              <div class="cell cell-price" role="columnheader">Цена</div>
+              <div class="cell cell-total" role="columnheader">Сумма</div>
             </div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </li>
-        </ul>
+
+            <article class="basket-row basket-item" role="row">
+              <div class="cell cell-product">
+                <img src="images/cards/monik1.png" alt="Монитор CORE View 27" class="item-image" />
+                <div class="item-info">
+                  <h2 class="item-title">Монитор CORE View 27</h2>
+                  <p class="item-meta">27", IPS, 165 Гц, 2560x1440</p>
+                </div>
+              </div>
+              <div class="cell cell-availability">
+                <span class="status status--in-stock">В наличии</span>
+              </div>
+              <div class="cell cell-quantity">
+                <div class="quantity-control" aria-label="Количество товара">
+                  <button type="button" aria-label="Уменьшить количество">-</button>
+                  <span>1</span>
+                  <button type="button" aria-label="Увеличить количество">+</button>
+                </div>
+              </div>
+              <div class="cell cell-price">62 400 ₽</div>
+              <div class="cell cell-total">62 400 ₽</div>
+            </article>
+
+            <article class="basket-row basket-item" role="row">
+              <div class="cell cell-product">
+                <img src="images/cards/pk1.png" alt="Игровой компьютер CORE X1" class="item-image" />
+                <div class="item-info">
+                  <h2 class="item-title">Игровой компьютер CORE X1</h2>
+                  <p class="item-meta">Ryzen 7, RTX 4070, 32 GB RAM</p>
+                </div>
+              </div>
+              <div class="cell cell-availability">
+                <span class="status status--in-stock">В наличии</span>
+              </div>
+              <div class="cell cell-quantity">
+                <div class="quantity-control" aria-label="Количество товара">
+                  <button type="button" aria-label="Уменьшить количество">-</button>
+                  <span>1</span>
+                  <button type="button" aria-label="Увеличить количество">+</button>
+                </div>
+              </div>
+              <div class="cell cell-price">62 400 ₽</div>
+              <div class="cell cell-total">62 400 ₽</div>
+            </article>
+          </div>
+
+          <aside class="basket-summary" aria-label="Итоги заказа">
+            <div class="summary-row">
+              <span>Товары (2)</span>
+              <span>124 800 ₽</span>
+            </div>
+            <div class="summary-row">
+              <span>Доставка</span>
+              <span>0 ₽</span>
+            </div>
+            <div class="summary-row summary-row--total">
+              <span>Итого</span>
+              <span>124 800 ₽</span>
+            </div>
+            <button type="button" class="checkout-button">Оформить заказ</button>
+            <button type="button" class="continue-button" onclick="document.location='catalog.html'">
+              Продолжить покупки
+            </button>
+          </aside>
+        </section>
       </main>
     </div>
     <footer>

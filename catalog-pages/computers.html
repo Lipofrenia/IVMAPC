@@ -24,18 +24,18 @@
                 <li>
                     <button type="button" class="nav-flyout-trigger" data-nav-panel="contacts" aria-expanded="false" aria-controls="nav-content-contacts">Контакты</button>
                 </li>
-                <li><a href="../catalog.html">Каталог</a></li>
+                <li><a class="current-page" href="../catalog.html">Каталог</a></li>
             </ul>
             <div class="search-bar">
                 <input type="text" placeholder="Поиск">
                 <button type="submit"><img src="../images/research.svg" alt="Find"></button>
             </div>
             <div class="user-actions">
-                <button type="button">
+                <button type="button" onclick="document.location='../basket.html'">
                     <img src="../images/cart.svg" alt="Корзина">
                     <p>Корзина</p>
                 </button>
-                <button type="button" onclick="document.location='../autorization.html'">
+                <button type="button" onclick="document.location='../authorization.html'">
                     <img src="../images/account.svg" alt="Профиль">
                     <p class="current-page">Профиль</p>
                 </button>
@@ -60,10 +60,114 @@
     <div class="background">
         <main>
             <h1>Игровые компьютеры</h1>
+            <p class="page-subtitle">Готовые сборки для игр, стриминга и рабочих задач</p>
             <div class="line"></div>
-            <section>
-                <aside><p>1</p></aside>
-                <div class="catalog-content"><p>2</p></div>
+            <section class="catalog-layout">
+                <aside class="filters" aria-label="Фильтры каталога">
+                    <div class="filter-block">
+                        <h2>Цена</h2>
+                        <div class="range-inputs">
+                            <label>
+                                От
+                                <input type="number" placeholder="50 000">
+                            </label>
+                            <label>
+                                До
+                                <input type="number" placeholder="300 000">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-block">
+                        <h2>Процессор</h2>
+                        <label class="checkbox"><input type="checkbox"> Intel Core i5/i7</label>
+                        <label class="checkbox"><input type="checkbox"> AMD Ryzen 5/7</label>
+                        <label class="checkbox"><input type="checkbox"> Intel Core i9 / Ryzen 9</label>
+                    </div>
+
+                    <div class="filter-block">
+                        <h2>Видеокарта</h2>
+                        <label class="checkbox"><input type="checkbox"> NVIDIA RTX 4060</label>
+                        <label class="checkbox"><input type="checkbox"> NVIDIA RTX 4070</label>
+                        <label class="checkbox"><input type="checkbox"> NVIDIA RTX 4080+</label>
+                    </div>
+
+                    <div class="filter-block">
+                        <h2>ОЗУ</h2>
+                        <label class="checkbox"><input type="checkbox"> 16 GB</label>
+                        <label class="checkbox"><input type="checkbox"> 32 GB</label>
+                        <label class="checkbox"><input type="checkbox"> 64 GB</label>
+                    </div>
+
+                    <button type="button" class="apply-filters">Применить фильтры</button>
+                    <button type="button" class="reset-filters">Сбросить</button>
+                </aside>
+
+                <div class="catalog-content">
+                    <div class="catalog-toolbar">
+                        <p>Найдено: 6 товаров</p>
+                        <label>
+                            Сортировка
+                            <select>
+                                <option>Сначала популярные</option>
+                                <option>Сначала дешевле</option>
+                                <option>Сначала дороже</option>
+                                <option>Сначала новые</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="products-grid">
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--1"></div>
+                            <p class="product-category">Игровой ПК</p>
+                            <h3>CORE X1</h3>
+                            <p class="product-specs">Ryzen 7 7700 / RTX 4070 / 32 GB / 1 TB SSD</p>
+                            <p class="product-price">124 900 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--2"></div>
+                            <p class="product-category">Игровой ПК</p>
+                            <h3>CORE X2</h3>
+                            <p class="product-specs">Core i7 14700 / RTX 4070 Super / 32 GB / 1 TB SSD</p>
+                            <p class="product-price">139 900 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--3"></div>
+                            <p class="product-category">Игровой ПК</p>
+                            <h3>CORE X3</h3>
+                            <p class="product-specs">Ryzen 9 7900 / RTX 4080 / 32 GB / 2 TB SSD</p>
+                            <p class="product-price">184 900 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--4"></div>
+                            <p class="product-category">Игровой ПК</p>
+                            <h3>CORE LITE</h3>
+                            <p class="product-specs">Core i5 13400 / RTX 4060 / 16 GB / 512 GB SSD</p>
+                            <p class="product-price">94 900 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--5"></div>
+                            <p class="product-category">Игровой ПК</p>
+                            <h3>CORE STREAM</h3>
+                            <p class="product-specs">Ryzen 7 8700G / RTX 4070 / 32 GB / 1 TB SSD</p>
+                            <p class="product-price">129 900 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--6"></div>
+                            <p class="product-category">Игровой ПК</p>
+                            <h3>CORE PRO</h3>
+                            <p class="product-specs">Core i9 14900 / RTX 4090 / 64 GB / 2 TB SSD</p>
+                            <p class="product-price">259 900 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                    </div>
+                </div>
             </section>
         </main>
     </div>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IVMAPC |   </title>
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/navigation.css" />
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav>
+        <button
+          class="menu-button"
+          type="button"
+          aria-label=" "
+          aria-expanded="false"
+          aria-controls="nav-links">
+          <img src="images/menu.svg" alt="" />
+        </button>
+        <a class="logo-link" href="index.html">
+          <img class="logo" src="images/logo.svg" alt="IVMAPC"/>
+        </a>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="index.html"></a></li>
+          <li>
+            <button
+              type="button"
+              class="nav-flyout-trigger"
+              data-nav-panel="company"
+              aria-expanded="false"
+              aria-controls="nav-content-company">
+               
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              class="nav-flyout-trigger"
+              data-nav-panel="contacts"
+              aria-expanded="false"
+              aria-controls="nav-content-contacts">
+              
+            </button>
+          </li>
+          <li><a href="catalog.html"></a></li>
+        </ul>
+        <div class="search-bar">
+          <input type="text" placeholder="" />
+          <button type="submit">
+            <img src="images/research.svg" alt="Find" />
+          </button>
+        </div>
+        <div class="user-actions">
+          <button type="button" onclick="document.location='basket.html'">
+            <img src="images/cart.svg" alt="" />
+            <p></p>
+          </button>
+          <button type="button" onclick="document.location='authorization.html'">
+            <img src="images/account.svg" alt="" />
+            <p class="current-page"></p>
+          </button>
+        </div>
+      </nav>
+      <div
+        class="nav-flyout"
+        id="nav-flyout"
+        role="region"
+        aria-label=" ">
+        <div id="nav-content-company" class="nav-flyout-panel" hidden>
+          <div class="nav-flyout-inner">
+            <h3 class="nav-flyout-title"> IVMAPC</h3>
+            <p class="nav-flyout-text">
+               IVMAPC    2026 .   
+                    NVIDIA,
+              Intel, Microsoft.      
+                     
+              Wargaming, UbiSoft, Electronic Arts, Bethesda  Mail.Games.
+            </p>
+          </div>
+        </div>
+        <div id="nav-content-contacts" class="nav-flyout-panel" hidden>
+          <div class="nav-flyout-inner">
+            <h3 class="nav-flyout-title"></h3>
+            <p class="nav-flyout-text">
+              .: +7 (800) 555-35-35, email: info@ivmapc.ru
+            </p>
+            <p class="nav-flyout-text">
+              . , . , 67. : 10:0021:00, :
+              11:0019:00
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="background">
+      <main></main>
+    </div>
+    <footer>
+      <div class="footer-line"></div>
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>IVMAPC</h3>
+          <p>
+                     
+            : ,   .
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3></h3>
+          <p>: +7 (800) 555 35-35</p>
+          <p>Email: info@ivmapc.ru</p>
+          <p>. , . , 67</p>
+        </div>
+        <div class="footer-column">
+          <h3> </h3>
+          <p>-: 10:00 - 21:00</p>
+          <p>-: 11:00 - 19:00</p>
+        </div>
+      </div>
+      <div class="footer-line"></div>
+      <div class="footer-bottom">
+        <p> 2026 IVMAPC.   .</p>
+      </div>
+    </footer>
+    <script src="scripts/nav-panels.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVMAPC | Магазин Компьютерной техники</title>
+    <link rel="stylesheet" href="../styles/normalize.css">
+    <link rel="stylesheet" href="../styles/navigation.css">
+    <link rel="stylesheet" href="../styles/catalog-page.css">
+    <link rel="stylesheet" href="../styles/footer.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav>
+            <button class="menu-button" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-links">
+                <img src="../images/menu.svg" alt="">
+            </button>
+            <a class="logo-link" href="../index.html"><img class="logo" src="../images/logo.svg" alt="IVMAPC"></a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html">Главная</a></li>
+                <li>
+                    <button type="button" class="nav-flyout-trigger" data-nav-panel="company" aria-expanded="false" aria-controls="nav-content-company">О компании</button>
+                </li>
+                <li>
+                    <button type="button" class="nav-flyout-trigger" data-nav-panel="contacts" aria-expanded="false" aria-controls="nav-content-contacts">Контакты</button>
+                </li>
+                <li><a class="current-page" href="../catalog.html">Каталог</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Поиск">
+                <button type="submit"><img src="../images/research.svg" alt="Find"></button>
+            </div>
+            <div class="user-actions">
+                <button type="button" onclick="document.location='../basket.html'">
+                    <img src="../images/cart.svg" alt="Корзина">
+                    <p>Корзина</p>
+                </button>
+                <button type="button" onclick="document.location='../authorization.html'">
+                    <img src="../images/account.svg" alt="Профиль">
+                    <p class="current-page">Профиль</p>
+                </button>
+            </div>
+        </nav>
+        <div class="nav-flyout" id="nav-flyout" role="region" aria-label="Дополнительная информация">
+            <div id="nav-content-company" class="nav-flyout-panel" hidden>
+                <div class="nav-flyout-inner">
+                    <h3 class="nav-flyout-title">Компания IVMAPC</h3>
+                    <p class="nav-flyout-text">Компания IVMAPC была основана в 2026 году. Мы — официальный партнер таких известных технологических гигантов как NVIDIA, Intel, Microsoft. Нам также удалось реализовать несколько успешных совместных проектов с такими известными игровыми компаниями как Wargaming, UbiSoft, Electronic Arts, Bethesda и Mail.Games.</p>
+                </div>
+            </div>
+            <div id="nav-content-contacts" class="nav-flyout-panel" hidden>
+                <div class="nav-flyout-inner">
+                    <h3 class="nav-flyout-title">Контакты</h3>
+                    <p class="nav-flyout-text">Тел.: +7 (800) 555-35-35, email: info@ivmapc.ru</p>
+                    <p class="nav-flyout-text">г. Орел, ул. Центральная, 67. Пн–Пт: 10:00–21:00, Сб–Вс: 11:00–19:00</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="background">
+        <main>
+            <h1>Микрофоны</h1>
+            <p class="page-subtitle">USB и XLR микрофоны для стримов, подкастов и записи</p>
+            <div class="line"></div>
+            <section class="catalog-layout">
+                <aside class="filters" aria-label="Фильтры каталога">
+                    <div class="filter-block">
+                        <h2>Цена</h2>
+                        <div class="range-inputs">
+                            <label>
+                                От
+                                <input type="number" placeholder="2 500">
+                            </label>
+                            <label>
+                                До
+                                <input type="number" placeholder="60 000">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-block">
+                        <h2>Подключение</h2>
+                        <label class="checkbox"><input type="checkbox"> USB</label>
+                        <label class="checkbox"><input type="checkbox"> USB-C</label>
+                        <label class="checkbox"><input type="checkbox"> XLR</label>
+                    </div>
+
+                    <div class="filter-block">
+                        <h2>Тип</h2>
+                        <label class="checkbox"><input type="checkbox"> Конденсаторный</label>
+                        <label class="checkbox"><input type="checkbox"> Динамический</label>
+                    </div>
+
+                    <div class="filter-block">
+                        <h2>Диаграмма направленности</h2>
+                        <label class="checkbox"><input type="checkbox"> Кардиоидная</label>
+                        <label class="checkbox"><input type="checkbox"> Суперкардиоидная</label>
+                        <label class="checkbox"><input type="checkbox"> Всенаправленная</label>
+                    </div>
+
+                    <button type="button" class="apply-filters">Применить фильтры</button>
+                    <button type="button" class="reset-filters">Сбросить</button>
+                </aside>
+
+                <div class="catalog-content">
+                    <div class="catalog-toolbar">
+                        <p>Найдено: 6 товаров</p>
+                        <label>
+                            Сортировка
+                            <select>
+                                <option>Сначала популярные</option>
+                                <option>Сначала дешевле</option>
+                                <option>Сначала дороже</option>
+                                <option>Сначала новые</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="products-grid">
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--1"></div>
+                            <p class="product-category">Микрофон</p>
+                            <h3>CORE Mic M1</h3>
+                            <p class="product-specs">USB, кардиоидный, pop-filter</p>
+                            <p class="product-price">4 990 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--2"></div>
+                            <p class="product-category">Микрофон</p>
+                            <h3>CORE Mic M2</h3>
+                            <p class="product-specs">USB-C, 24 bit, стойка</p>
+                            <p class="product-price">7 490 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--3"></div>
+                            <p class="product-category">Микрофон</p>
+                            <h3>CORE Mic M3</h3>
+                            <p class="product-specs">XLR, студийный, металлический</p>
+                            <p class="product-price">12 990 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--4"></div>
+                            <p class="product-category">Микрофон</p>
+                            <h3>CORE Mic M4</h3>
+                            <p class="product-specs">USB/XLR, RGB, мониторинг</p>
+                            <p class="product-price">10 990 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--5"></div>
+                            <p class="product-category">Микрофон</p>
+                            <h3>CORE Mic M5</h3>
+                            <p class="product-specs">Конденсаторный, low-noise</p>
+                            <p class="product-price">16 490 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                        <a class="product-card-link" href="product.html"><article class="product-card">
+                            <div class="product-image product-image--6"></div>
+                            <p class="product-category">Микрофон</p>
+                            <h3>CORE Mic M6</h3>
+                            <p class="product-specs">Премиум, для подкастов</p>
+                            <p class="product-price">24 990 ₽</p>
+                            <button type="button">Подробнее</button>
+                        </article></a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <div class="footer-line"></div>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>IVMAPC</h3>
+                <p>Магазин компьютерной техники и комплектующих для сборки ПК под любые задачи: учеба, работа и игры.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Контакты</h3>
+                <p>Телефон: +7 (800) 555 35-35</p>
+                <p>Email: info@ivmapc.ru</p>
+                <p>г. Орел, ул. Центральная, 67</p>
+            </div>
+            <div class="footer-column">
+                <h3>Режим работы</h3>
+                <p>Пн-Пт: 10:00 - 21:00</p>
+                <p>Сб-Вс: 11:00 - 19:00</p>
+            </div>
+        </div>
+        <div class="footer-line"></div>
+        <div class="footer-bottom">
+            <p>© 2026 IVMAPC. Все права защищены.</p>
+        </div>
+    </footer>
+    <script src="../scripts/nav-panels.js" defer></script>
+</body>
+</html>

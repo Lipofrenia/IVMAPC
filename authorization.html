@@ -6,7 +6,7 @@
     <title>IVMAPC | Магазин Компьютерной техники</title>
     <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/navigation.css" />
-    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/authorization.css" />
     <link rel="stylesheet" href="styles/footer.css" />
   </head>
   <body>
@@ -17,13 +17,12 @@
           type="button"
           aria-label="Открыть меню"
           aria-expanded="false"
-          aria-controls="nav-links"
-        >
+          aria-controls="nav-links">
           <img src="images/menu.svg" alt="" />
         </button>
-        <a class="logo-link" href="index.html"
-          ><img class="logo" src="images/logo.svg" alt="IVMAPC"
-        /></a>
+        <a class="logo-link" href="index.html">
+          <img class="logo" src="images/logo.svg" alt="IVMAPC"/>
+        </a>
         <ul class="nav-links" id="nav-links">
           <li><a href="index.html">Главная</a></li>
           <li>
@@ -32,8 +31,7 @@
               class="nav-flyout-trigger"
               data-nav-panel="company"
               aria-expanded="false"
-              aria-controls="nav-content-company"
-            >
+              aria-controls="nav-content-company">
               О компании
             </button>
           </li>
@@ -43,8 +41,7 @@
               class="nav-flyout-trigger"
               data-nav-panel="contacts"
               aria-expanded="false"
-              aria-controls="nav-content-contacts"
-            >
+              aria-controls="nav-content-contacts">
               Контакты
             </button>
           </li>
@@ -61,7 +58,10 @@
             <img src="images/cart.svg" alt="Корзина" />
             <p>Корзина</p>
           </button>
-          <button type="button" onclick="document.location='autorization.html'">
+          <button
+            class="current-page"
+            type="button"
+            onclick="document.location='authorization.html'">
             <img src="images/account.svg" alt="Профиль" />
             <p class="current-page">Профиль</p>
           </button>
@@ -71,8 +71,7 @@
         class="nav-flyout"
         id="nav-flyout"
         role="region"
-        aria-label="Дополнительная информация"
-      >
+        aria-label="Дополнительная информация">
         <div id="nav-content-company" class="nav-flyout-panel" hidden>
           <div class="nav-flyout-inner">
             <h3 class="nav-flyout-title">Компания IVMAPC</h3>
@@ -100,7 +99,26 @@
       </div>
     </header>
     <div class="background">
-      <main></main>
+      <main>
+        <div class="form">
+          <h1>Вход в личный кабинет</h1>
+          <div class="input">
+            <input
+              type="email"
+              placeholder="Номер телефона/электронная почта"/>
+          </div>
+          <div class="input">
+            <input type="password" placeholder="Пароль" />
+          </div>
+          <button class="authorize" onclick="document.location='profile.html'">
+            Войти
+          </button>
+          <div class="register">
+            <a href="forgot-password.html">Забыли пароль?</a>
+            <a href="register.html">Зарегистрироваться</a>
+          </div>
+        </div>
+      </main>
     </div>
     <footer>
       <div class="footer-line"></div>
