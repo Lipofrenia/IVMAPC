@@ -155,3 +155,58 @@ input:-webkit-autofill:focus {
         font-size: 14px;
     }
 }
+
+/* ── Валидация форм ─────────────────────────────────────────────────────────── */
+
+/* Ошибка под полем */
+.field-error {
+    width: 520px;
+    margin-top: -16px; /* компенсируем gap формы, подтягиваемся к полю */
+    font-size: 13px;
+    color: #ff5c5c;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
+  }
+  
+  /* Иконка предупреждения перед текстом ошибки */
+  .field-error:not(:empty)::before {
+    content: "";
+    display: inline-block;
+}
+  
+  .field-error--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  @media (max-width: 900px) {
+    .field-error {
+      width: min(520px, 100%);
+    }
+  }
+  
+  /* Обводка поля при ошибке */
+  .input--error {
+    outline: 2px solid #ff5c5c;
+    outline-offset: 0;
+  }
+  
+  /* Кнопка неактивна */
+  .authorize--disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  /* Кнопка «Письмо отправлено» */
+  .authorize--sent {
+    border-color: #06b526 !important;
+    color: #7fff95 !important;
+    opacity: 1 !important;
+    cursor: default;
+  }
