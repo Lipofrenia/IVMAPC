@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IVMAPC |   </title>
+    <title>IVMAPC | Регистрация</title>
     <link rel="stylesheet" href="styles/normalize.css" />
     <link rel="stylesheet" href="styles/navigation.css" />
-    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="styles/search.css" />
     <link rel="stylesheet" href="styles/footer.css" />
   </head>
   <body>
@@ -15,7 +15,7 @@
         <button
           class="menu-button"
           type="button"
-          aria-label=" "
+          aria-label="Открыть меню"
           aria-expanded="false"
           aria-controls="nav-links">
           <img src="images/menu.svg" alt="" />
@@ -24,7 +24,7 @@
           <img class="logo" src="images/logo.svg" alt="IVMAPC"/>
         </a>
         <ul class="nav-links" id="nav-links">
-          <li><a href="index.html"></a></li>
+          <li><a href="index.html">Главная</a></li>
           <li>
             <button
               type="button"
@@ -32,7 +32,7 @@
               data-nav-panel="company"
               aria-expanded="false"
               aria-controls="nav-content-company">
-               
+              О компании
             </button>
           </li>
           <li>
@@ -42,25 +42,28 @@
               data-nav-panel="contacts"
               aria-expanded="false"
               aria-controls="nav-content-contacts">
-              
+              Контакты
             </button>
           </li>
-          <li><a href="catalog.html"></a></li>
+          <li><a href="catalog.html">Каталог</a></li>
         </ul>
         <div class="search-bar">
-          <input type="text" placeholder="" />
-          <button type="submit">
+          <input type="text" placeholder="Поиск" />
+          <button type="submit" onclick="document.location='search.html'">
             <img src="images/research.svg" alt="Find" />
           </button>
         </div>
         <div class="user-actions">
           <button type="button" onclick="document.location='basket.html'">
-            <img src="images/cart.svg" alt="" />
-            <p></p>
+            <img src="images/cart.svg" alt="Корзина" />
+            <p>Корзина</p>
           </button>
-          <button type="button" onclick="document.location='authorization.html'">
-            <img src="images/account.svg" alt="" />
-            <p class="current-page"></p>
+          <button
+            class="current-page"
+            type="button"
+            onclick="document.location='authorization.html'">
+            <img src="images/account.svg" alt="Профиль" />
+            <p class="current-page">Профиль</p>
           </button>
         </div>
       </nav>
@@ -68,35 +71,38 @@
         class="nav-flyout"
         id="nav-flyout"
         role="region"
-        aria-label=" ">
+        aria-label="Дополнительная информация">
         <div id="nav-content-company" class="nav-flyout-panel" hidden>
           <div class="nav-flyout-inner">
-            <h3 class="nav-flyout-title"> IVMAPC</h3>
+            <h3 class="nav-flyout-title">Компания IVMAPC</h3>
             <p class="nav-flyout-text">
-               IVMAPC    2026 .   
-                    NVIDIA,
-              Intel, Microsoft.      
-                     
-              Wargaming, UbiSoft, Electronic Arts, Bethesda  Mail.Games.
+              Компания IVMAPC была основана в 2026 году. Мы — официальный
+              партнер таких известных технологических гигантов как NVIDIA,
+              Intel, Microsoft. Нам также удалось реализовать несколько успешных
+              совместных проектов с такими известными игровыми компаниями как
+              Wargaming, UbiSoft, Electronic Arts, Bethesda и Mail.Games.
             </p>
           </div>
         </div>
         <div id="nav-content-contacts" class="nav-flyout-panel" hidden>
           <div class="nav-flyout-inner">
-            <h3 class="nav-flyout-title"></h3>
+            <h3 class="nav-flyout-title">Контакты</h3>
             <p class="nav-flyout-text">
-              .: +7 (800) 555-35-35, email: info@ivmapc.ru
+              Тел.: +7 (800) 555-35-35, email: info@ivmapc.ru
             </p>
             <p class="nav-flyout-text">
-              . , . , 67. : 10:0021:00, :
-              11:0019:00
+              г. Орел, ул. Центральная, 67. Пн–Пт: 10:00–21:00, Сб–Вс:
+              11:00–19:00
             </p>
           </div>
         </div>
       </div>
     </header>
     <div class="background">
-      <main></main>
+      <main>
+        <h1>По вашему запросу "ваш запрос" ничего не найдено :(</h1>
+        
+      </main>
     </div>
     <footer>
       <div class="footer-line"></div>
@@ -104,25 +110,25 @@
         <div class="footer-column">
           <h3>IVMAPC</h3>
           <p>
-                     
-            : ,   .
+            Магазин компьютерной техники и комплектующих для сборки ПК под любые
+            задачи: учеба, работа и игры.
           </p>
         </div>
         <div class="footer-column">
-          <h3></h3>
-          <p>: +7 (800) 555 35-35</p>
+          <h3>Контакты</h3>
+          <p>Телефон: +7 (800) 555 35-35</p>
           <p>Email: info@ivmapc.ru</p>
-          <p>. , . , 67</p>
+          <p>г. Орел, ул. Центральная, 67</p>
         </div>
         <div class="footer-column">
-          <h3> </h3>
-          <p>-: 10:00 - 21:00</p>
-          <p>-: 11:00 - 19:00</p>
+          <h3>Режим работы</h3>
+          <p>Пн-Пт: 10:00 - 21:00</p>
+          <p>Сб-Вс: 11:00 - 19:00</p>
         </div>
       </div>
       <div class="footer-line"></div>
       <div class="footer-bottom">
-        <p> 2026 IVMAPC.   .</p>
+        <p>© 2026 IVMAPC. Все права защищены.</p>
       </div>
     </footer>
     <script src="scripts/nav-panels.js" defer></script>
