@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static shop_tags %}
+
+{% block title %}IVMAPC | {{ category.name }}{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/catalog-page.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <main>
+      <h1>{{ category.name }}</h1>
+      {% if category.page_subtitle %}
+        <p class="page-subtitle">{{ category.page_subtitle }}</p>
+      {% endif %}
+      <div class="line"></div>
+      <section class="catalog-layout">
+        <aside class="filters" aria-label="Фильтры каталога">
+          <form method="get" action="">
+            <div class="filter-block">
+              <h2>Цена</h2>
+              <div class="range-inputs">
+                <label>
+                  От
+                  <input type="number" name="price_min" placeholder="50 000" value="{{ price_min }}" />
+                </label>
+                <label>
+                  До
+                  <input type="number" name="price_max" placeholder="300 000" value="{{ price_max }}" />
+                </label>
+              </div>
+            </div>
+            <input type="hidden" name="sort" value="{{ current_sort }}" />
+            <button type="submit" class="apply-filters" style="margin-top: 10px;">Применить фильтры</button>
+            <a href="{{ category.get_absolute_url }}" class="reset-filters" style="display:flex;align-items:center;justify-content:center;margin-top:10px;text-decoration:none;font-size:14px;">Сбросить</a>
+          </form>
+        </aside>
+
+        <div class="catalog-content">
+          <div class="catalog-toolbar">
+            <p>Найдено: {{ products|length }} товар{{ products|length|pluralize:"ов,а,ов" }}</p>
+            <label>
+              Сортировка
+              <select onchange="window.location.search='?sort='+this.value+'{% if price_min %}&price_min={{ price_min }}{% endif %}{% if price_max %}&price_max={{ price_max }}{% endif %}'">
+                <option value="popular" {% if current_sort == 'popular' %}selected{% endif %}>Сначала популярные</option>
+                <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>Сначала дешевле</option>
+                <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Сначала дороже</option>
+                <option value="new" {% if current_sort == 'new' %}selected{% endif %}>Сначала новые</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="products-grid">
+            {% for product in products %}
+              <a class="product-card-link" href="{{ product.get_absolute_url }}">
+                <article class="product-card">
+                  <div class="product-image" {% if product.main_image %}style="background-image:url('{{ product.main_image.image.url }}');background-size:contain;background-position:center;background-repeat:no-repeat;"{% endif %}></div>
+                  <p class="product-category">{{ product.name }}</p>
+                  <h3>{{ product.model_name }}</h3>
+                  {% if product.specs_short %}
+                    <p class="product-specs">{{ product.specs_short }}</p>
+                  {% endif %}
+                  <p class="product-price">{{ product.formatted_price }}</p>
+                  <button type="button">Подробнее</button>
+                </article>
+              </a>
+            {% empty %}
+              <p style="color:#aaa;font-size:18px;padding:40px;text-align:center;width:100%;grid-column: 1 / -1;">Товаров в данной категории пока нет</p>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+{% endblock %}

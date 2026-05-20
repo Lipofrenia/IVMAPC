@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}IVMAPC | Профиль{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/modal.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <main>
+      <div class="info">
+        <div class="prof-info">
+          {% if profile.photo %}
+            <img id="profile-photo" src="{{ profile.photo.url }}" alt="profile" />
+          {% else %}
+            <img id="profile-photo" src="{% static 'images/profile-photo.png' %}" alt="profile" />
+          {% endif %}
+          <h1 id="profile-name">{{ user.username }}</h1>
+          <div class="line"></div>
+          <h2 id="profile-email">{{ user.email }}</h2>
+          <h2 id="profile-phone">{{ profile.phone|default:"Не указан" }}</h2>
+          <button class="settings" id="settings-btn">Настройки</button>
+          <a href="{% url 'shop:logout' %}" class="settings" style="margin-top:10px;background:#1a1a1a;border:1px solid #333;color:#d32f2f;display:flex;align-items:center;justify-content:center;text-decoration:none;">Выйти</a>
+        </div>
+        <div class="order-info">
+          <div class="order-nav">
+            <button class="my-orders active" id="orders-tab">Мои заказы</button>
+          </div>
+          <div class="order-content" id="order-content">
+            {% if orders %}
+              {% for order in orders %}
+                <div style="background:#1e1e1e;border-radius:12px;padding:16px;margin-bottom:12px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                    <strong style="color:#fff;">Заказ #{{ order.pk }}</strong>
+                    <span style="color:#06B526;font-size:14px;">{{ order.get_status_display }}</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;font-size:14px;color:#aaa;">
+                    <span>{{ order.created_at|date:"d.m.Y H:i" }}</span>
+                    <span style="color:#fff;font-weight:600;">{{ order.formatted_total }}</span>
+                  </div>
+                  {% for item in order.items.all %}
+                    <div style="font-size:13px;color:#888;padding-top:4px;">
+                      {{ item.product_name }} × {{ item.quantity }}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endfor %}
+            {% else %}
+              <p class="not-content">Вы пока ничего не заказали</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<!-- Модальное окно -->
+  <div id="profile-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Редактирование профиля</h2>
+        <span class="modal-close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="profile-form" method="post" action="{% url 'shop:profile' %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="modal-name">Имя пользователя</label>
+            <input type="text" id="modal-name" name="name"
+                   value="{{ user.username }}"
+                   minlength="2" maxlength="30"
+                   required>
+            <small class="field-hint">От 2 до 30 символов</small>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-email">Email</label>
+            <input type="email" id="modal-email" name="email"
+                   value="{{ user.email }}"
+                   maxlength="100" required>
+            <small class="field-hint">example@domain.com</small>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-phone">Телефон</label>
+            <input type="tel" id="modal-phone" name="phone"
+                   value="{{ profile.phone }}"
+                   placeholder="+7 (XXX) XXX-XX-XX"
+                   maxlength="20">
+            <small class="field-hint">Формат: +7 (123) 456-78-90</small>
+          </div>
+
+          <div class="form-group">
+            <label>Фото профиля</label>
+            <div class="file-upload-wrapper">
+              <input type="file" id="modal-photo" name="photo" class="file-upload-input" accept="image/*">
+              <label for="modal-photo" class="file-upload-button">
+                Выбрать фото
+              </label>
+            </div>
+            <div id="file-name" class="file-name"></div>
+            <div id="photo-preview" class="photo-preview"></div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel">Отмена</button>
+            <button type="submit" class="btn-save">Сохранить</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/profile.js' %}?v=2" defer></script>
+{% endblock %}

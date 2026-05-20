@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static shop_tags %}
+
+{% block title %}IVMAPC | {{ product.name }} {{ product.model_name }}{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/product.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <main>
+      <section class="product-section">
+
+        <div class="product-gallery">
+          <div class="product-gallery__main">
+            {% if images %}
+              <img
+                id="main-image"
+                src="{{ images.0.image.url }}"
+                alt="{{ images.0.alt_text|default:product.name }}"
+                class="product-gallery__main-img" />
+            {% endif %}
+          </div>
+          {% if images.count > 1 %}
+            <div class="product-gallery__thumbs" role="list" aria-label="Миниатюры">
+              {% for img in images %}
+                <button
+                  class="product-gallery__thumb {% if forloop.first %}active{% endif %}"
+                  type="button"
+                  aria-label="{{ img.alt_text|default:'Фото' }}"
+                  data-img="{{ img.image.url }}">
+                  <img src="{{ img.image.url }}" alt="{{ img.alt_text|default:'Фото' }}" />
+                </button>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="product-info">
+          <p class="product-info__category">{{ product.name }}</p>
+          <h1 class="product-info__title">{{ product.model_name }}</h1>
+
+          <div class="product-info__status">
+            <div class="info-line">
+              <div class="in-stock">
+                <div class="mark-status {% if product.is_available and product.stock_quantity > 0 %}green{% else %}red{% endif %}"></div>
+                <p>{{ product.stock_status }}</p>
+              </div>
+              {% if product.stock_quantity > 0 %}
+                <div class="count">
+                  <div class="mark-status blue"></div>
+                  <p>Осталось: {{ product.stock_quantity }} шт.</p>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <p class="product-info__price">{{ product.formatted_price }}</p>
+
+          {% if product.short_description %}
+            <p class="product-info__desc">{{ product.short_description }}</p>
+          {% endif %}
+
+          <div class="product-info__actions">
+            <form method="post" action="{% url 'shop:cart_add' %}" style="display:inline">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ product.pk }}" />
+              <input type="hidden" name="next" value="{{ product.get_absolute_url }}" />
+              <button class="btn-cart" type="submit">
+                <img src="{% static 'images/cart.svg' %}" alt="" />
+                В корзину
+              </button>
+            </form>
+          </div>
+
+          {% if quick_specs %}
+            <ul class="product-info__quick-specs">
+              {% for spec in quick_specs %}
+                <li>
+                  <span class="spec-label">{{ spec.label }}</span>
+                  <span class="spec-value">{{ spec.value }}</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </section>
+
+      {% if product.full_description or spec_groups %}
+        <section class="product-tabs">
+          <div class="product-tabs__nav" role="tablist">
+            {% if product.full_description %}
+              <button class="product-tabs__tab active" type="button" role="tab" aria-selected="true" aria-controls="tab-desc" data-tab="desc">
+                Описание
+              </button>
+            {% endif %}
+            {% if spec_groups %}
+              <button class="product-tabs__tab {% if not product.full_description %}active{% endif %}" type="button" role="tab" aria-selected="{% if not product.full_description %}true{% else %}false{% endif %}" aria-controls="tab-specs" data-tab="specs">
+                Характеристики
+              </button>
+            {% endif %}
+          </div>
+
+          {% if product.full_description %}
+            <div class="product-tabs__content active" id="tab-desc" role="tabpanel">
+              {{ product.full_description|linebreaks }}
+            </div>
+          {% endif %}
+
+          {% if spec_groups %}
+            <div class="product-tabs__content {% if not product.full_description %}active{% endif %}" id="tab-specs" role="tabpanel" {% if product.full_description %}hidden{% endif %}>
+              <table class="specs-table">
+                <tbody>
+                  {% for group in spec_groups %}
+                    <tr>
+                      <th colspan="2" class="specs-table__group">{{ group.name }}</th>
+                    </tr>
+                    {% for spec in group.specs.all %}
+                      <tr>
+                        <td>{{ spec.label }}</td>
+                        <td>{{ spec.value }}</td>
+                      </tr>
+                    {% endfor %}
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% endif %}
+        </section>
+      {% endif %}
+    </main>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/product.js' %}" defer></script>
+{% endblock %}

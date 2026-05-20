@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}IVMAPC | Каталог{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/catalog.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <main>
+      <h1>Каталог товаров</h1>
+      <h2>Все необходимое для того, чтобы собрать свой персональный компьютер</h2>
+      <div class="catalog-nav">
+        {% for cat in categories %}
+          <button
+            class="item item-{{ forloop.counter }}"
+            type="button"
+            onclick="document.location='{{ cat.get_absolute_url }}'">
+            <span class="item-tag">{{ cat.tag }}</span>
+            <span class="item-title">{{ cat.title|default:cat.name }}</span>
+            <span class="item-subtitle">{{ cat.subtitle }}</span>
+          </button>
+        {% endfor %}
+      </div>
+    </main>
+  </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}IVMAPC | Вход{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/authorization.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <main>
+      <form class="form" method="post" action="{% url 'shop:login' %}">
+        {% csrf_token %}
+        <h1>Вход в личный кабинет</h1>
+        <div class="input">
+          <input
+            id="inp-email"
+            type="email"
+            name="email"
+            autocomplete="email"
+            placeholder="Электронная почта"
+            required />
+        </div>
+        <div class="input">
+          <input
+            id="inp-password"
+            type="password"
+            name="password"
+            autocomplete="current-password"
+            placeholder="Пароль"
+            required />
+        </div>
+        <button class="authorize" type="submit">Войти</button>
+        <div class="register">
+          <a href="{% url 'shop:forgot_password' %}">Забыли пароль?</a>
+          <a href="{% url 'shop:register' %}">Зарегистрироваться</a>
+        </div>
+      </form>
+    </main>
+  </div>
+{% endblock %}

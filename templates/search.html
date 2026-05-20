@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static shop_tags %}
+
+{% block title %}IVMAPC | Поиск{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/search.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/catalog-page.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <main>
+      {% if query %}
+        {% if products %}
+          <h1>Результаты поиска «{{ query }}»</h1>
+          <div class="products-grid" style="margin-top:20px;">
+            {% for product in products %}
+              <a class="product-card-link" href="{{ product.get_absolute_url }}">
+                <article class="product-card">
+                  <div class="product-image" {% if product.main_image %}style="background-image:url('{{ product.main_image.image.url }}');background-size:contain;background-position:center;background-repeat:no-repeat;"{% endif %}></div>
+                  <p class="product-category">{{ product.name }}</p>
+                  <h3>{{ product.model_name }}</h3>
+                  {% if product.specs_short %}
+                    <p class="product-specs">{{ product.specs_short }}</p>
+                  {% endif %}
+                  <p class="product-price">{{ product.formatted_price }}</p>
+                  <button type="button">Подробнее</button>
+                </article>
+              </a>
+            {% endfor %}
+          </div>
+        {% else %}
+          <h1>По вашему запросу «{{ query }}» ничего не найдено :(</h1>
+        {% endif %}
+      {% else %}
+        <h1>Введите запрос для поиска</h1>
+      {% endif %}
+    </main>
+  </div>
+{% endblock %}

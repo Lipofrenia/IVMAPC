@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static shop_tags %}
+
+{% block title %}IVMAPC | Корзина{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/basket.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <main>
+      <section class="basket">
+        <div class="basket-header">
+          <h1>Корзина</h1>
+          {% if items %}
+            <p class="basket-subtitle">{{ count }} товар{{ count|pluralize:"ов,а,ов" }} на сумму {{ total_formatted }}</p>
+          {% endif %}
+        </div>
+
+        {% if items %}
+          <div class="basket-table" role="table" aria-label="Товары в корзине">
+            <div class="basket-row basket-row--head" role="row">
+              <div class="cell cell-product" role="columnheader">Товар</div>
+              <div class="cell cell-availability" role="columnheader">Наличие</div>
+              <div class="cell cell-quantity" role="columnheader">Количество</div>
+              <div class="cell cell-price" role="columnheader">Цена</div>
+              <div class="cell cell-total" role="columnheader">Сумма</div>
+            </div>
+
+            {% for item in items %}
+              <article class="basket-row basket-item" role="row">
+                <div class="cell cell-product">
+                  {% if item.product.main_image %}
+                    <img src="{{ item.product.main_image.image.url }}" alt="{{ item.product }}" class="item-image" />
+                  {% endif %}
+                  <div class="item-info">
+                    <h2 class="item-title">{{ item.product.name }} {{ item.product.model_name }}</h2>
+                    {% if item.product.specs_short %}
+                      <p class="item-meta">{{ item.product.specs_short }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+                <div class="cell cell-availability">
+                  <span class="status status--in-stock">{{ item.product.stock_status }}</span>
+                </div>
+                <div class="cell cell-quantity">
+                  <div class="quantity-control" aria-label="Количество товара">
+                    <form method="post" action="{% url 'shop:cart_update' %}" style="display:inline">
+                      {% csrf_token %}
+                      <input type="hidden" name="item_id" value="{{ item.pk }}" />
+                      <input type="hidden" name="action" value="decrease" />
+                      <button type="submit" aria-label="Уменьшить количество">-</button>
+                    </form>
+                    <span>{{ item.quantity }}</span>
+                    <form method="post" action="{% url 'shop:cart_update' %}" style="display:inline">
+                      {% csrf_token %}
+                      <input type="hidden" name="item_id" value="{{ item.pk }}" />
+                      <input type="hidden" name="action" value="increase" />
+                      <button type="submit" aria-label="Увеличить количество">+</button>
+                    </form>
+                  </div>
+                </div>
+                <div class="cell cell-price">{{ item.product.formatted_price }}</div>
+                <div class="cell cell-total">{{ item.formatted_total }}</div>
+              </article>
+            {% endfor %}
+          </div>
+
+          <aside class="basket-summary" aria-label="Итоги заказа">
+            <div class="summary-row">
+              <span>Товары ({{ count }})</span>
+              <span>{{ total_formatted }}</span>
+            </div>
+            <div class="summary-row summary-row--total">
+              <span>Итого</span>
+              <span>{{ total_formatted }}</span>
+            </div>
+            {% if user.is_authenticated %}
+              <form method="post" action="{% url 'shop:checkout' %}">
+                {% csrf_token %}
+                <button type="submit" class="checkout-button">Оформить заказ</button>
+              </form>
+            {% else %}
+              <a href="{% url 'shop:login' %}" class="checkout-button" style="display:block;text-align:center;text-decoration:none;">Войти для оформления</a>
+            {% endif %}
+            <button type="button" class="continue-button" onclick="document.location='{% url 'shop:catalog' %}'">
+              Продолжить покупки
+            </button>
+          </aside>
+        {% else %}
+          <div class="empty-basket" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; padding: 60px 0;">
+            <p style="color:#aaa;font-size:24px;margin:0;">Корзина пуста</p>
+            <button type="button" class="continue-button" onclick="document.location='{% url 'shop:catalog' %}'" style="background:#06B526;color:#fff;border:none;padding:16px 40px;border-radius:12px;font-size:18px;font-weight:600;cursor:pointer;width:auto;height:auto;">
+              Перейти в каталог
+            </button>
+          </div>
+        {% endif %}
+      </section>
+    </main>
+  </div>
+{% endblock %}

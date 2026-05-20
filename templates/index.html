@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static shop_tags %}
+
+{% block extra_head_css %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <h1>СОБЕРИ СВОЙ ПЕРВЫЙ ПК</h1>
+
+    {% if slides %}
+      <section class="slider" aria-roledescription="carousel" aria-label="Слайды">
+        <div class="swiper hero-swiper">
+          <div class="swiper-wrapper">
+            {% for slide in slides %}
+              <div class="swiper-slide">
+                {% if slide.link %}
+                  <a href="{{ slide.link }}" class="slide-card" role="img" aria-label="{{ slide.title|default:'Слайд' }}" style="background-image:url('{{ slide.image.url }}');display:block;"></a>
+                {% else %}
+                  <div class="slide-card" role="img" aria-label="{{ slide.title|default:'Слайд' }}" style="background-image:url('{{ slide.image.url }}');"></div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="slider-buttons">
+          <button type="button" class="hero-swiper-prev prev" aria-label="Предыдущий слайд">
+            <img src="{% static 'images/left.svg' %}" alt="" />
+          </button>
+          <button type="button" class="hero-swiper-next next" aria-label="Следующий слайд">
+            <img src="{% static 'images/right.svg' %}" alt="" />
+          </button>
+        </div>
+        <div class="hero-swiper-pagination slider-status" aria-label="Номер слайда"></div>
+      </section>
+    {% endif %}
+
+    <main>
+      {% for section in featured_sections %}
+        <section>
+          <h2>{{ section.category.name }}</h2>
+          <div class="main-cards">
+            {% for product in section.products %}
+              <div class="card">
+                <div class="card-info" {% if product.main_image %}style="background-image:url('{{ product.main_image.image.url }}');background-size:contain;background-position:center;background-repeat:no-repeat;"{% endif %}>
+                  <div class="info-line">
+                    <div class="in-stock">
+                      <div class="mark-status {% if product.is_available and product.stock_quantity > 0 %}green{% else %}red{% endif %}"></div>
+                      <p>{{ product.stock_status }}</p>
+                    </div>
+                    {% if product.stock_quantity > 0 %}
+                      <div class="count">
+                        <div class="mark-status blue"></div>
+                        <p>Осталось: {{ product.stock_quantity }} шт.</p>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <p class="card-name">{{ product.name }}</p>
+                <p class="card-title">{{ product.model_name }}</p>
+                <p class="card-cell">{{ product.formatted_price }}</p>
+                <form method="post" action="{% url 'shop:cart_add' %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="product_id" value="{{ product.pk }}" />
+                  <input type="hidden" name="next" value="{% url 'shop:index' %}" />
+                  <button type="submit" class="card-cart">
+                    <img src="{% static 'images/cart.svg' %}" alt="" />
+                    В корзину
+                  </button>
+                </form>
+                <button class="card-more" type="button" onclick="document.location='{{ product.get_absolute_url }}'">Подробнее</button>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+    </main>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="{% static 'js/slider.js' %}" defer></script>
+{% endblock %}
