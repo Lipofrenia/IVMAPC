@@ -48,6 +48,7 @@
             </button>
           </li>
           <li><a {% if active_page == 'catalog' %}class="current-page"{% endif %} href="{% url 'shop:catalog' %}">Каталог</a></li>
+          <li><a {% if active_page == 'support' %}class="current-page"{% endif %} href="{% url 'shop:support' %}">Поддержка</a></li>
         </ul>
         <form class="search-bar" action="{% url 'shop:search' %}" method="get">
           <input type="text" name="q" placeholder="Поиск" value="{{ request.GET.q|default:'' }}" />

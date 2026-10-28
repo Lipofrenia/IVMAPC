@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}IVMAPC | Служба поддержки{% endblock %}
+
+{% block page_css %}
+  <link rel="stylesheet" href="{% static 'css/support.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="background">
+    <main>
+      <h1>Служба поддержки</h1>
+      <p class="support-subtitle">Задайте вопрос — консультанты и другие покупатели ответят в реальном времени</p>
+
+      <section class="chat" id="chat" data-ws-url="{{ chat_ws_url }}" data-auto-name="{{ default_name }}">
+        <!-- Шапка чата -->
+        <header class="chat-header">
+          <div class="chat-header-info">
+            <span class="chat-status-dot" id="chat-status-dot"></span>
+            <div>
+              <h3 class="chat-title">Чат поддержки IVMAPC</h3>
+              <p class="chat-status" id="chat-status">Не подключено</p>
+            </div>
+          </div>
+          <div class="chat-header-meta">
+            <span class="chat-online" id="chat-online" hidden>Онлайн: 0</span>
+            <span class="chat-me" id="chat-me" hidden></span>
+          </div>
+        </header>
+
+        <!-- Окно сообщений -->
+        <div class="chat-messages" id="chat-messages" aria-live="polite">
+          <p class="chat-empty" id="chat-empty">Сообщений пока нет. Напишите первым!</p>
+        </div>
+
+        <!-- Индикатор набора текста -->
+        <div class="chat-typing" id="chat-typing" aria-live="polite"></div>
+
+        <!-- Поле ввода -->
+        <form class="chat-form" id="chat-form" autocomplete="off">
+          <input
+            class="chat-input"
+            id="chat-input"
+            type="text"
+            maxlength="1000"
+            placeholder="Введите сообщение и нажмите Enter…"
+            disabled />
+          <button class="chat-send" id="chat-send" type="submit" disabled>Отправить</button>
+        </form>
+
+        <!-- Окно ввода имени (только для гостей; авторизованные входят под своим логином) -->
+        <div class="chat-join" id="chat-join" {% if default_name %}hidden{% endif %}>
+          <form class="chat-join-card" id="chat-join-form" autocomplete="off">
+            <h3>Представьтесь, пожалуйста</h3>
+            <p>Ваше имя увидят все участники чата</p>
+            <input
+              class="chat-input"
+              id="chat-name"
+              type="text"
+              maxlength="30"
+              placeholder="Ваше имя"
+              required />
+            <button class="chat-send" type="submit">Войти в чат</button>
+            <p class="chat-join-error" id="chat-join-error"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/support-chat.js' %}" defer></script>
+{% endblock %}
+

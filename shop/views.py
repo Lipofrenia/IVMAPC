@@ -1,5 +1,6 @@
 import json
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -149,6 +150,24 @@ def search(request):
         {
             "query": query,
             "products": products,
+        },
+    )
+
+
+# ── Чат службы поддержки ─────────────────────────────────────
+
+
+def support_chat(request):
+    # Сам чат работает через отдельный WebSocket-сервер на Node.js (chat-server/),
+    # Django лишь отдаёт страницу и подставляет адрес сервера и имя пользователя.
+    default_name = request.user.username if request.user.is_authenticated else ""
+    return render(
+        request,
+        "support.html",
+        {
+            "active_page": "support",
+            "chat_ws_url": settings.CHAT_WS_URL,
+            "default_name": default_name,
         },
     )
 

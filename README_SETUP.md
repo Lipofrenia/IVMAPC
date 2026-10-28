@@ -59,6 +59,31 @@ python manage.py runserver
 
 Админ-панель: http://127.0.0.1:8000/admin/
 
+## 7. Чат службы поддержки (WebSocket, Node.js)
+
+Чат работает на отдельном WebSocket-сервере (Node.js 18+, порт **8080**).
+Django отдаёт страницу чата, а сообщения идут напрямую между браузером и Node.js.
+
+```bash
+cd chat-server
+npm install      # один раз — установит библиотеку ws
+npm start        # запустит ws://localhost:8080
+```
+
+Затем во втором терминале запустите Django (`python manage.py runserver`) и откройте
+http://127.0.0.1:8000/support/ (пункт меню «Поддержка»).
+Для проверки откройте страницу в двух вкладках/браузерах под разными именами.
+
+Файлы чата:
+- `chat-server/server.js` — WebSocket-сервер (вход/выход, рассылка сообщений, «печатает…»)
+- `templates/support.html` — разметка страницы чата
+- `static/css/support.css` — стили чата
+- `static/js/support-chat.js` — клиент WebSocket в браузере
+- `shop/views.py` → `support_chat`, маршрут `support/` в `shop/urls.py`
+
+> Адрес сервера можно изменить переменной `CHAT_WS_URL` в `.env`
+> (по умолчанию `ws://<хост сайта>:8080`).
+
 ## Структура проекта
 
 ```

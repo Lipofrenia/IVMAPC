@@ -24,6 +24,13 @@ class Command(BaseCommand):
         # ── Слайды ────────────────────────────────────────
         slider_dir = os.path.join(settings.MEDIA_ROOT, "slider")
         os.makedirs(slider_dir, exist_ok=True)
+        static_slider = os.path.join(settings.BASE_DIR, "static", "images", "slider")
+        if os.path.isdir(static_slider):
+            for fname in os.listdir(static_slider):
+                src = os.path.join(static_slider, fname)
+                dst = os.path.join(slider_dir, fname)
+                if not os.path.exists(dst):
+                    shutil.copy2(src, dst)
 
         slide_files = [
             "Slide 1.png",

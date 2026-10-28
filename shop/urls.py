@@ -14,6 +14,7 @@ urlpatterns = [
         name="product",
     ),
     path("search/", views.search, name="search"),
+    path("support/", views.support_chat, name="support"),
     # Auth
     path("auth/login/", views.login_view, name="login"),
     path("auth/register/", views.register_view, name="register"),

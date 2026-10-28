@@ -1,0 +1,14 @@
+{
+  "name": "ivmapc-support-chat",
+  "version": "1.0.0",
+  "description": "WebSocket-сервер чата службы поддержки IVMAPC",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
+
