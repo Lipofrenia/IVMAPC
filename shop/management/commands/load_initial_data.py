@@ -1,5 +1,4 @@
 import os
-import shutil
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
@@ -16,7 +15,7 @@ from shop.models import (
 
 
 class Command(BaseCommand):
-    help = "Загружает начальные данные (категории, товары, слайды) из существующего фронтенда"
+    help = "Загружает начальные данные (категории, товары, слайды)"
 
     def handle(self, *args, **options):
         self.stdout.write("Загрузка начальных данных...")
@@ -24,13 +23,6 @@ class Command(BaseCommand):
         # ── Слайды ────────────────────────────────────────
         slider_dir = os.path.join(settings.MEDIA_ROOT, "slider")
         os.makedirs(slider_dir, exist_ok=True)
-        static_slider = os.path.join(settings.BASE_DIR, "static", "images", "slider")
-        if os.path.isdir(static_slider):
-            for fname in os.listdir(static_slider):
-                src = os.path.join(static_slider, fname)
-                dst = os.path.join(slider_dir, fname)
-                if not os.path.exists(dst):
-                    shutil.copy2(src, dst)
 
         slide_files = [
             "Slide 1.png",
@@ -123,15 +115,8 @@ class Command(BaseCommand):
         monitors = Category.objects.get(slug="monitors")
         keyboards = Category.objects.get(slug="keyboards")
 
-        # Копирование изображений из static в media
         products_media = os.path.join(settings.MEDIA_ROOT, "products")
         os.makedirs(products_media, exist_ok=True)
-        static_cards = os.path.join(settings.BASE_DIR, "static", "images", "cards")
-        for fname in os.listdir(static_cards):
-            src = os.path.join(static_cards, fname)
-            dst = os.path.join(products_media, fname)
-            if not os.path.exists(dst):
-                shutil.copy2(src, dst)
 
         products_data = [
             {
