@@ -1,15 +1,21 @@
 /**
  * Клиент чата службы поддержки IVMAPC.
- * Подключается к WebSocket-серверу на Node.js (chat-server/server.js, порт 8080).
+ * Подключается по защищённому протоколу WSS к Node.js серверу (chat-server/server.js, порт 8080).
+ *
+ * Возможности:
+ *   - Подключение по wss:// (с подсказкой принятия самоподписанного сертификата)
+ *   - Получение истории последних 50 сообщений при входе
+ *   - Публичные и приватные сообщения (/pm Имя текст или клик по имени в шапке)
+ *   - Живой список активных онлайн-пользователей в шапке чата
+ *   - Индикатор «Пользователь N печатает…» (гаснет через 2 с после окончания ввода)
  */
 (function () {
   "use strict";
 
-  const TYPING_TIMEOUT = 2000; // индикатор исчезает через 2 с после окончания ввода
+  const TYPING_TIMEOUT = 2000;
 
   const chatEl = document.getElementById("chat");
   const messagesEl = document.getElementById("chat-messages");
-  const emptyEl = document.getElementById("chat-empty");
   const typingEl = document.getElementById("chat-typing");
   const formEl = document.getElementById("chat-form");
   const inputEl = document.getElementById("chat-input");
@@ -18,23 +24,30 @@
   const statusDot = document.getElementById("chat-status-dot");
   const onlineEl = document.getElementById("chat-online");
   const meEl = document.getElementById("chat-me");
+  const usersBarEl = document.getElementById("chat-users-bar");
+  const usersListEl = document.getElementById("chat-users-list");
+  const certBannerEl = document.getElementById("chat-cert-banner");
+  const certLinkEl = document.getElementById("chat-cert-link");
   const joinEl = document.getElementById("chat-join");
   const joinForm = document.getElementById("chat-join-form");
   const nameInput = document.getElementById("chat-name");
   const joinError = document.getElementById("chat-join-error");
 
-  // Адрес сервера: из настроек Django или ws://<текущий хост>:8080
-  const WS_URL = chatEl.dataset.wsUrl || `ws://${location.hostname || "localhost"}:8080`;
+  // Защищённое соединение WSS по умолчанию: wss://<текущий хост>:8080
+  const WS_URL = chatEl.dataset.wsUrl || `wss://${location.hostname || "localhost"}:8080`;
+  const HTTPS_CERT_URL = WS_URL.replace(/^wss:/i, "https:").replace(/^ws:/i, "http:");
+  certLinkEl.href = HTTPS_CERT_URL;
 
   let socket = null;
   let myId = null;
   let userName = "";
-  let pageClosing = false; // страница закрывается — переподключаться не нужно
+  let pageClosing = false;
+  let manualRename = false;
+  let reconnectTimer = null;
 
   // Кто сейчас печатает: id -> { name, timer }
   const typingUsers = new Map();
 
-  // Состояние собственного набора текста
   let iAmTyping = false;
   let myTypingTimer = null;
 
@@ -68,24 +81,33 @@
   }
 
   function hideEmpty() {
-    if (emptyEl) emptyEl.remove();
+    const empty = document.getElementById("chat-empty");
+    if (empty) empty.remove();
   }
 
-  // ── Отрисовка сообщений ────────────────────────────────────
-  // Текст вставляется через textContent — это защищает от XSS.
+  function resetMessagesContainer() {
+    messagesEl.innerHTML =
+      '<p class="chat-empty" id="chat-empty">Сообщений пока нет. Напишите первым!</p>';
+  }
 
-  function renderMessage(msg) {
+  // ── Отрисовка сообщений (через textContent для защиты от XSS) ──
+
+  function renderMessage(msg, isFromHistory = false) {
     hideEmpty();
+    const isOwn = isFromHistory
+      ? msg.name === userName
+      : msg.id === myId || msg.name === userName;
+
     const wrapper = document.createElement("div");
     wrapper.className = "chat-message";
-    if (msg.id === myId) wrapper.classList.add("is-own");
+    if (isOwn) wrapper.classList.add("is-own");
 
     const meta = document.createElement("div");
     meta.className = "chat-message-meta";
 
     const name = document.createElement("span");
     name.className = "chat-message-name";
-    name.textContent = msg.id === myId ? `${msg.name} (вы)` : msg.name;
+    name.textContent = isOwn ? `${msg.name} (вы)` : msg.name;
 
     const time = document.createElement("time");
     time.className = "chat-message-time";
@@ -102,26 +124,89 @@
     scrollToBottom();
   }
 
+  function renderPrivateMessage(msg) {
+    hideEmpty();
+    const isOwn = msg.fromId === myId || msg.from === userName;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "chat-message is-private";
+    if (isOwn) wrapper.classList.add("is-own");
+
+    const meta = document.createElement("div");
+    meta.className = "chat-message-meta";
+
+    const badge = document.createElement("span");
+    badge.className = "chat-pm-badge";
+    badge.textContent = "Лично";
+
+    const name = document.createElement("span");
+    name.className = "chat-message-name";
+    name.textContent = isOwn ? `Вы → ${msg.to}` : `${msg.from} → Вам`;
+
+    const time = document.createElement("time");
+    time.className = "chat-message-time";
+    time.dateTime = msg.time;
+    time.textContent = formatTime(msg.time);
+
+    const text = document.createElement("p");
+    text.className = "chat-message-text";
+    text.textContent = msg.text;
+
+    meta.append(badge, name, time);
+    wrapper.append(meta, text);
+    messagesEl.append(wrapper);
+    scrollToBottom();
+  }
+
   function renderSystem(text, iso) {
     hideEmpty();
     const el = document.createElement("div");
     el.className = "chat-system";
     el.textContent = text;
 
-    const time = document.createElement("time");
-    time.textContent = formatTime(iso);
-    el.append(time);
+    if (iso) {
+      const time = document.createElement("time");
+      time.textContent = formatTime(iso);
+      el.append(time);
+    }
 
     messagesEl.append(el);
     scrollToBottom();
   }
 
+  // ── Список онлайн-пользователей в шапке ────────────────────
+
   function updateOnline(count, users) {
-    if (typeof count !== "number") return;
-    onlineEl.hidden = false;
-    onlineEl.textContent = `Онлайн: ${count}`;
-    // При наведении на счётчик показываем, кто именно в чате
-    if (Array.isArray(users)) onlineEl.title = users.join("\n");
+    if (typeof count === "number") {
+      onlineEl.hidden = false;
+      onlineEl.textContent = `Онлайн: ${count}`;
+    }
+
+    if (!Array.isArray(users)) return;
+
+    usersListEl.innerHTML = "";
+    if (users.length === 0) {
+      usersBarEl.hidden = true;
+      return;
+    }
+
+    usersBarEl.hidden = false;
+    for (const uName of users) {
+      const isMe = uName === userName;
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "chat-user-chip" + (isMe ? " is-me" : "");
+      chip.textContent = isMe ? `${uName} (вы)` : uName;
+
+      if (!isMe) {
+        chip.title = `Написать личное сообщение пользователю ${uName}`;
+        chip.addEventListener("click", () => {
+          inputEl.value = `/pm ${uName} `;
+          inputEl.focus();
+        });
+      }
+      usersListEl.append(chip);
+    }
   }
 
   // ── Индикатор «Пользователь N печатает…» ───────────────────
@@ -153,14 +238,17 @@
     }
     const prev = typingUsers.get(data.id);
     if (prev) clearTimeout(prev.timer);
-    // Страховка: если сигнал «перестал печатать» не придёт, скрываем через 2 с
     const timer = setTimeout(() => removeTyping(data.id), TYPING_TIMEOUT);
     typingUsers.set(data.id, { name: data.name, timer });
     renderTyping();
   }
 
-  // Вызывается при каждом вводе символа в поле сообщения
   function onUserInput() {
+    // Для личных команд (/pm ...) не рассылаем индикатор набора всем в общий чат
+    if (/^\/pm(\s|$)/i.test(inputEl.value.trim())) {
+      stopTyping();
+      return;
+    }
     if (!iAmTyping) {
       iAmTyping = true;
       send({ type: "typing", isTyping: true });
@@ -177,14 +265,19 @@
     }
   }
 
-  // ── Работа с WebSocket ─────────────────────────────────────
+  // ── Работа с защищённым WebSocket (WSS) ────────────────────
 
   function connect() {
-    setStatus("Подключение…", "connecting");
+    clearTimeout(reconnectTimer);
+    setStatus("Защищённое подключение (WSS)…", "connecting");
     socket = new WebSocket(WS_URL);
 
+    let opened = false;
+
     socket.addEventListener("open", () => {
-      setStatus("Подключено", "online");
+      opened = true;
+      certBannerEl.hidden = true;
+      setStatus("Подключено (шифрование WSS)", "online");
       send({ type: "join", name: userName });
     });
 
@@ -201,18 +294,36 @@
           myId = data.id;
           userName = data.name;
           meEl.hidden = false;
-          meEl.textContent = `Вы: ${userName}`;
+          meEl.textContent = `Вы: ${userName} ✎`;
+
+          // Отрисовываем историю последних 50 сообщений с сервера
+          resetMessagesContainer();
+          if (Array.isArray(data.history) && data.history.length > 0) {
+            for (const item of data.history) {
+              renderMessage(item, true);
+            }
+            renderSystem(`Загружена история сообщений (${data.history.length})`);
+          }
+
           updateOnline(data.online, data.users);
           setInputEnabled(true);
           break;
+
         case "message":
-          removeTyping(data.id); // отправитель закончил печатать
+          removeTyping(data.id);
           renderMessage(data);
           break;
+
+        case "private":
+          removeTyping(data.fromId);
+          renderPrivateMessage(data);
+          break;
+
         case "system":
           renderSystem(data.text, data.time);
           updateOnline(data.online, data.users);
           break;
+
         case "typing":
           if (data.id !== myId) handleTyping(data);
           break;
@@ -220,24 +331,26 @@
     });
 
     socket.addEventListener("close", () => {
-      if (pageClosing) return;
+      if (pageClosing || manualRename) return;
       setStatus("Соединение потеряно. Переподключение через 3 с…", "offline");
       setInputEnabled(false);
       typingUsers.forEach((u) => clearTimeout(u.timer));
       typingUsers.clear();
       renderTyping();
       iAmTyping = false;
-      setTimeout(connect, 3000); // автоматическое переподключение
+      reconnectTimer = setTimeout(connect, 3000);
     });
 
     socket.addEventListener("error", () => {
-      setStatus("Сервер чата недоступен (ws://…:8080)", "offline");
+      if (!opened && WS_URL.toLowerCase().startsWith("wss://")) {
+        certBannerEl.hidden = false;
+      }
+      setStatus(`Сервер недоступен или не принят сертификат (${WS_URL})`, "offline");
     });
   }
 
   // ── Обработчики интерфейса ─────────────────────────────────
 
-  // Вход в чат: пользователь вводит имя
   joinForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const name = nameInput.value.trim();
@@ -245,12 +358,30 @@
       joinError.textContent = "Введите имя";
       return;
     }
+    joinError.textContent = "";
+    manualRename = false;
     userName = name;
     joinEl.hidden = true;
     connect();
   });
 
-  // Отправка сообщения (кнопка «Отправить» или Enter — submit формы)
+  // Смена имени по клику на «Вы: Имя ✎» (удобно при проверке в нескольких вкладках)
+  meEl.addEventListener("click", () => {
+    manualRename = true;
+    clearTimeout(reconnectTimer);
+    stopTyping();
+    if (socket) socket.close(1000, "Смена имени");
+    setInputEnabled(false);
+    setStatus("Не подключено", "offline");
+    usersBarEl.hidden = true;
+    onlineEl.hidden = true;
+    meEl.hidden = true;
+    nameInput.value = userName;
+    joinEl.hidden = false;
+    nameInput.focus();
+    nameInput.select();
+  });
+
   formEl.addEventListener("submit", (event) => {
     event.preventDefault();
     const text = inputEl.value.trim();
@@ -269,7 +400,6 @@
     }
   });
 
-  // Явная обработка Enter (Shift+Enter игнорируем)
   inputEl.addEventListener("keydown", (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
@@ -277,15 +407,13 @@
     }
   });
 
-  // Пользователь закрыл вкладку или ушёл на другую страницу сайта —
-  // явно закрываем соединение, чтобы сервер сразу отправил «покинул чат».
   window.addEventListener("pagehide", () => {
     pageClosing = true;
+    clearTimeout(reconnectTimer);
     stopTyping();
     if (socket) socket.close(1000, "Страница закрыта");
   });
 
-  // Возврат на страницу кнопкой «Назад» (страница восстановлена из кэша браузера)
   window.addEventListener("pageshow", (event) => {
     if (event.persisted && userName) {
       pageClosing = false;
@@ -293,8 +421,6 @@
     }
   });
 
-  // Авторизованный пользователь сайта входит сразу под своим логином,
-  // гостю показываем форму ввода имени.
   const autoName = chatEl.dataset.autoName;
   if (autoName) {
     userName = autoName;
@@ -304,4 +430,3 @@
     nameInput.focus();
   }
 })();
-

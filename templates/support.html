@@ -14,18 +14,37 @@
       <p class="support-subtitle">Задайте вопрос — консультанты и другие покупатели ответят в реальном времени</p>
 
       <section class="chat" id="chat" data-ws-url="{{ chat_ws_url }}" data-auto-name="{{ default_name }}">
-        <!-- Шапка чата -->
+        <!-- Шапка чата со статусом и списком онлайн-пользователей -->
         <header class="chat-header">
-          <div class="chat-header-info">
-            <span class="chat-status-dot" id="chat-status-dot"></span>
-            <div>
-              <h3 class="chat-title">Чат поддержки IVMAPC</h3>
-              <p class="chat-status" id="chat-status">Не подключено</p>
+          <div class="chat-header-top">
+            <div class="chat-header-info">
+              <span class="chat-status-dot" id="chat-status-dot"></span>
+              <div>
+                <h3 class="chat-title">Чат поддержки IVMAPC <span class="chat-wss-badge">WSS</span></h3>
+                <p class="chat-status" id="chat-status">Не подключено</p>
+              </div>
+            </div>
+            <div class="chat-header-meta">
+              <span class="chat-online" id="chat-online" hidden>Онлайн: 0</span>
+              <button
+                type="button"
+                class="chat-me"
+                id="chat-me"
+                title="Нажмите, чтобы сменить имя в чате"
+                hidden></button>
             </div>
           </div>
-          <div class="chat-header-meta">
-            <span class="chat-online" id="chat-online" hidden>Онлайн: 0</span>
-            <span class="chat-me" id="chat-me" hidden></span>
+
+          <!-- Список активных участников чата -->
+          <div class="chat-users-bar" id="chat-users-bar" hidden>
+            <span class="chat-users-label">В чате:</span>
+            <div class="chat-users-list" id="chat-users-list"></div>
+          </div>
+
+          <!-- Подсказка для принятия самоподписанного сертификата WSS (показывается только при ошибке TLS) -->
+          <div class="chat-cert-banner" id="chat-cert-banner" hidden>
+            <span>Не удаётся подключиться по <b>wss://</b>. Убедитесь, что сервер запущен, или один раз примите самоподписанный сертификат в браузере:</span>
+            <a id="chat-cert-link" href="#" target="_blank" rel="noopener">Открыть сертификат сервера ↗</a>
           </div>
         </header>
 
@@ -44,12 +63,12 @@
             id="chat-input"
             type="text"
             maxlength="1000"
-            placeholder="Введите сообщение и нажмите Enter…"
+            placeholder="Введите сообщение (или /pm Имя текст для личного)…"
             disabled />
           <button class="chat-send" id="chat-send" type="submit" disabled>Отправить</button>
         </form>
 
-        <!-- Окно ввода имени (только для гостей; авторизованные входят под своим логином) -->
+        <!-- Окно ввода имени (для гостей или при смене имени) -->
         <div class="chat-join" id="chat-join" {% if default_name %}hidden{% endif %}>
           <form class="chat-join-card" id="chat-join-form" autocomplete="off">
             <h3>Представьтесь, пожалуйста</h3>
@@ -73,4 +92,3 @@
 {% block extra_js %}
   <script src="{% static 'js/support-chat.js' %}" defer></script>
 {% endblock %}
-

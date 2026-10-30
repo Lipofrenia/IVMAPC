@@ -29,7 +29,7 @@ h1 {
 .chat {
     position: relative;
     max-width: 900px;
-    height: 640px;
+    height: 680px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -44,11 +44,18 @@ h1 {
 
 .chat-header {
     display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 24px;
+    border-bottom: 1px solid #2a2a2a;
+    background-color: #1c1c1c;
+}
+
+.chat-header-top {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    padding: 18px 24px;
-    border-bottom: 1px solid #2a2a2a;
 }
 
 .chat-header-info {
@@ -79,6 +86,20 @@ h1 {
     margin: 0;
     font-size: 18px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chat-wss-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: #C0FF01;
+    background-color: rgba(192, 255, 1, 0.12);
+    border: 1px solid rgba(192, 255, 1, 0.35);
+    border-radius: 6px;
+    padding: 2px 6px;
 }
 
 .chat-status {
@@ -89,6 +110,7 @@ h1 {
 
 .chat-header-meta {
     display: flex;
+    align-items: center;
     gap: 10px;
     font-size: 13px;
 }
@@ -99,10 +121,104 @@ h1 {
     border-radius: 12px;
     padding: 6px 12px;
     color: #d9d9d9;
+    font-size: 13px;
+    font-family: inherit;
 }
 
 .chat-me {
     color: #C0FF01;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.chat-me:hover {
+    background-color: #333;
+    border-color: rgba(192, 255, 1, 0.4);
+}
+
+/* Список онлайн-участников в шапке */
+.chat-users-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.chat-users-bar[hidden],
+.chat-cert-banner[hidden] {
+    display: none;
+}
+
+.chat-users-label {
+    font-size: 12px;
+    color: #888;
+    margin-right: 2px;
+}
+
+.chat-users-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.chat-user-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background-color: #262626;
+    border: 1px solid #333;
+    color: #e5e5e5;
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.chat-user-chip::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #06B526;
+}
+
+.chat-user-chip:hover:not(.is-me) {
+    background-color: #2f2f2f;
+    border-color: #C0FF01;
+    color: #C0FF01;
+}
+
+.chat-user-chip.is-me {
+    border-color: rgba(6, 181, 38, 0.55);
+    color: #9ff5ad;
+    cursor: default;
+}
+
+/* Баннер принятия самоподписанного сертификата */
+.chat-cert-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background-color: rgba(245, 166, 35, 0.12);
+    border: 1px solid rgba(245, 166, 35, 0.4);
+    font-size: 13px;
+    color: #f3d299;
+}
+
+.chat-cert-banner a {
+    color: #C0FF01;
+    font-weight: 600;
+    text-decoration: underline;
+    white-space: nowrap;
 }
 
 /* ── Окно сообщений ─────────────────────────────────────── */
@@ -176,7 +292,27 @@ h1 {
     border-radius: 16px 4px 16px 16px;
 }
 
-/* Сервисные сообщения (вошёл / покинул) */
+/* Приватные сообщения (/pm) */
+.chat-message.is-private .chat-message-name {
+    color: #d799ff;
+}
+
+.chat-message.is-private .chat-message-text {
+    background-color: #2b1f36;
+    border: 1px solid rgba(215, 153, 255, 0.45);
+    color: #f4e8ff;
+}
+
+.chat-pm-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 6px;
+    background-color: rgba(215, 153, 255, 0.18);
+    color: #e2b8ff;
+}
+
+/* Сервисные сообщения (вошёл / покинул / разделитель истории) */
 .chat-system {
     align-self: center;
     font-size: 13px;
@@ -332,10 +468,10 @@ h1 {
     }
 
     .chat {
-        height: 75vh;
+        height: 78vh;
     }
 
-    .chat-header {
+    .chat-header-top {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -346,8 +482,8 @@ h1 {
 
     .chat-messages,
     .chat-form,
-    .chat-typing {
+    .chat-typing,
+    .chat-header {
         padding-inline: 14px;
     }
 }
-

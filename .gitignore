@@ -7,3 +7,4 @@ staticfiles/
 .vscode/
 .idea/
 node_modules/
+chat-server/certs/

@@ -91,6 +91,6 @@ LOGIN_URL = "/auth/login/"
 LOGIN_REDIRECT_URL = "/auth/profile/"
 LOGOUT_REDIRECT_URL = "/"
 
-# Адрес WebSocket-сервера чата поддержки (Node.js, папка chat-server/).
-# Если пусто — в браузере используется ws://<текущий хост>:8080
+# Адрес защищённого WebSocket-сервера чата поддержки (Node.js WSS, папка chat-server/).
+# Если пусто — в браузере используется wss://<текущий хост>:8080
 CHAT_WS_URL = os.getenv("CHAT_WS_URL", "")
